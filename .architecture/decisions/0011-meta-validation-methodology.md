@@ -42,3 +42,5 @@ Harder — every phase boundary now includes a subagent dispatch (small cost) an
 - INV-014: Before declaring the plugin ready to ship, the transferability test is run on a non-Compass problem and the result is captured in `.architecture/validation/transferability-YYYY-MM-DD.md`.
 
 **Initial setup:** The first phase boundary evaluation happens at end of Phase 1 (scaffolding). It's a small phase (4 tasks), which makes it a good first run of the mechanism — if subagent dispatch works as expected for Phase 1, we have confidence in the mechanism for the larger phases that follow.
+
+**Downstream applicability:** ADR 0013 extends this mechanism into the default `templates/architecture/` shipped by the Compass plugin's `scripts/bootstrap-architecture.sh`. Downstream projects using Compass receive a `validation/` directory with an instructional README as a default; they may delete it if they do not want the mechanism. The mechanism requires Claude (or a comparable LLM subagent capability) to be available, which is always true for projects using Compass at all. See ADR 0013 for the rationale and opt-out.

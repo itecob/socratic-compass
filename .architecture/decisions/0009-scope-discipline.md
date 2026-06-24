@@ -37,3 +37,5 @@ Harder — adds a small ceremony (the scope statement) to every per-skill interv
 **Invariants this creates:**
 - INV-009: Every per-skill mini-interview opens with a scope statement.
 - INV-010: Mid-build insights that would change the plan structurally produce an ADR or a `scope-deferred.md` entry. Never absorbed silently.
+
+**Downstream applicability:** ADR 0013 extends this mechanism into the default `templates/architecture/` shipped by the Compass plugin's `scripts/bootstrap-architecture.sh`. Downstream projects using Compass receive `scope-deferred.md` as a default file; they may delete it if they do not want the mechanism. See ADR 0013 for the rationale and opt-out.

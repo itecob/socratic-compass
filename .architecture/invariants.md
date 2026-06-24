@@ -97,3 +97,16 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 **Verification:** `git log --oneline` shows one commit per phase boundary, with a phase prefix in the commit message.
 **Expected:** Phases 1–8 each have exactly one commit; the architecture bootstrap has one commit; planning artifacts have one commit. Roughly 10 commits total for the full build.
 **On failure:** If multiple commits exist within a phase, consider squashing before the next phase begins.
+
+## INV-017: ADRs 0009 and 0011 include "Downstream applicability" addenda referencing ADR 0013
+**Established by:** ADR 0013
+**Verification:** `[ "$(grep -l 'Downstream applicability' .architecture/decisions/0009*.md .architecture/decisions/0011*.md 2>/dev/null | wc -l)" = "2" ]`
+**Expected:** Both files contain the addendum.
+**On failure:** Add the missing addendum to the offending ADR; see ADR 0013.
+
+## INV-018: Bootstrap script's printed instructions include an "Opt-outs" section for `scope-deferred.md` and `validation/`
+**Established by:** ADR 0013
+**Verification:** `grep -c 'Opt-outs' scripts/bootstrap-architecture.sh`
+**Expected:** Output is `1` or more.
+**On failure:** Restore the Opt-outs section to the script's heredoc'd "Recommended next steps" output.
+t-outs paragraph to the script's heredoc'd "Recommended next steps" output.

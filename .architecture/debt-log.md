@@ -42,3 +42,13 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Will bite when:** Attempting to install the plugin into either Cowork or Claude Code — the loader may reject the manifest or ignore fields silently.
 **Cost to fix:** S (one pass against authoritative docs or against a known-working plugin's manifest; correct field names as needed).
 **Logged:** 2026-06-24
+
+## DEBT-006: Bootstrap script silently creates parent directories via `mkdir -p`
+**Files:** `scripts/bootstrap-architecture.sh`
+**Deferred:** Adding an explicit `[ -d "$TARGET" ]` pre-check before `mkdir -p "$TARGET/.architecture"`.
+**Reason:** Phase 2 reviewer flagged this as a small surprise — a user with a typo in the target path will get a `.architecture/` directory at an unexpected filesystem location. The current behavior is convenient (`mkdir -p` semantics) but not user-friendly to typo recovery.
+**Will bite when:** A user runs the bootstrap with a misspelled path; the script succeeds, but the `.architecture/` lands somewhere unexpected.
+**Cost to fix:** S (three-line pre-check; no design impact).
+**Logged:** 2026-06-24
+ct).
+**Logged:** 2026-06-24
