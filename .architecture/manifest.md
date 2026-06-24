@@ -44,3 +44,4 @@ The implementation plan lives at `plans/2026-06-24-compass-plan.md`. The design 
 - 0009 — Three-layer scope discipline for mid-build insights.
 - 0010 — Skill Build Checklist — standard question template for per-skill mini-interviews.
 - 0011 — Meta-validation methodology: anchor to spec §11, adversarial subagent per phase, transferability test at end.
+- 0012 — Build-time deviations from the plan: manifest content, README/CHANGELOG progress-document form, commit cadence collapsed to per-phase.

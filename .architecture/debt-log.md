@@ -34,3 +34,11 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Will bite when:** Anyone follows the plan literally from a fresh clone — they'll build skills that reference `.architecture/` content that doesn't exist yet.
 **Cost to fix:** S (rewrite the plan's phase ordering, or add a Phase 0 to the plan explicitly).
 **Logged:** 2026-06-24
+
+## DEBT-005: Plugin manifest schema is unverified
+**Files:** `plugin.json`
+**Deferred:** Confirming the exact schema Cowork and Claude Code expect for the plugin manifest.
+**Reason:** No authoritative documentation available at the time of writing. Used a reasonable conventional set of fields (`name`, `version`, `description`, `author`, `license`, `homepage`, `skills_dir`, `hooks_dir`).
+**Will bite when:** Attempting to install the plugin into either Cowork or Claude Code — the loader may reject the manifest or ignore fields silently.
+**Cost to fix:** S (one pass against authoritative docs or against a known-working plugin's manifest; correct field names as needed).
+**Logged:** 2026-06-24

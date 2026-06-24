@@ -4,12 +4,27 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 
 ## Status
 
-This repository currently contains **planning artifacts only**: a design spec and an implementation plan. The plugin itself has not yet been built. The next step is to execute the implementation plan, ideally after running the plugin's own `socratic-interview` skill on the build itself.
+**Phase 1 of 8 complete — Scaffolding.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). The repository is not yet installable as a plugin — the skills, hooks, and packaging scripts arrive in subsequent phases.
 
-## What's in here
+| Phase | Status | Contents |
+|---|---|---|
+| 0 (Architecture bootstrap) | Complete | `.architecture/` — interview transcript, ADRs 0001–0011, invariants, conventions, debt log, scope deferred, validation. Done out of plan order; see `DEBT-004`. |
+| 1 (Scaffolding) | Complete | Directory skeleton, `plugin.json`, README, CHANGELOG. |
+| 2 (Architecture template) | Pending | `templates/architecture/` files that `bootstrap-architecture.sh` copies into user projects. |
+| 3 (Nine new skills) | Pending | `socratic-interview`, `premise-check`, `design-archeology`, `tradeoff-matrix`, `adversarial-review`, `architecture-journal`, `session-handoff`, `invariant-scan`, `complexity-budget`. |
+| 4 (14 absorbed Superpowers skills) | Pending | Imported verbatim with namespace rewrite + attribution footer. |
+| 5 (Hooks) | Pending | Claude Code `SessionStart`, `PreToolUse`, `SessionEnd` reminders. |
+| 6 (Packaging) | Pending | `package-cowork.sh`, `package-claude-code.sh`. |
+| 7 (Dogfood reconcile) | Pending | Reconcile plugin's own `.architecture/` with what was bootstrapped early. |
+| 8 (Final verification) | Pending | Invariant scan + INV-014 transferability test. |
 
-- `specs/2026-06-24-compass-design.md` — design spec for the Compass plugin: nine new strategic-programming skills, fourteen workflow skills absorbed from Superpowers, the `.architecture/` cross-session memory mechanism, optional Claude Code hooks, dual-target packaging.
-- `plans/2026-06-24-compass-plan.md` — implementation plan: ~50 bite-sized tasks across eight phases that build the plugin from an empty repo.
+## What's in here right now
+
+- `specs/2026-06-24-compass-design.md` — design spec (nine new skills, fourteen absorbed, `.architecture/` memory mechanism, optional Claude Code hooks, dual-target packaging).
+- `plans/2026-06-24-compass-plan.md` — implementation plan (~50 bite-sized tasks across eight phases).
+- `.architecture/` — the architecture journal that the plugin itself uses on itself (dogfood). Eleven ADRs, fourteen invariants, conventions, debt log, scope-deferred, validation, and the first interview transcript.
+- `plugin.json` — plugin manifest declaring `compass` as the plugin name.
+- `CHANGELOG.md` — chronicle of what's been added.
 
 ## What Compass does
 

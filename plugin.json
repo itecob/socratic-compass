@@ -1,0 +1,10 @@
+{
+  "name": "compass",
+  "version": "0.1.0",
+  "description": "Strategic-programming skills with persistent architectural memory for Claude Code and Cowork. Closes gaps the existing Superpowers plugin leaves open: socratic-interview drives planning, premise-check validates and categorizes, design-archeology reads existing code, tradeoff-matrix forces named-axis comparison, adversarial-review attacks the plan, architecture-journal manages cross-session memory, session-handoff captures structural changes, invariant-scan verifies documented invariants, complexity-budget tracks shortcuts.",
+  "author": "itecob",
+  "license": "MIT",
+  "homepage": "https://github.com/itecob/socratic-compass",
+  "skills_dir": "skills",
+  "hooks_dir": "hooks"
+}

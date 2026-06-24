@@ -85,3 +85,15 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 **Verification:** `[ -f .architecture/validation/transferability-*.md ]`
 **Expected:** At least one transferability test result file exists before any "release" or "ship" action.
 **On failure:** Do not ship. Run the transferability test on a non-Compass problem and capture the result.
+
+## INV-015: README and CHANGELOG match plan Task 3 / Task 4 drafts at Phase 8 completion
+**Established by:** ADR 0012
+**Verification:** At Phase 8, diff the shipped `README.md` and `CHANGELOG.md` against the plan-drafted forms (in `plans/2026-06-24-compass-plan.md` Tasks 3 and 4).
+**Expected:** Shipped forms converge to the plan-drafted release forms before any tag is created.
+**On failure:** Rewrite README and CHANGELOG to the plan-drafted forms; do not release until they match.
+
+## INV-016: Each phase from Phase 1 forward produces exactly one consolidated commit
+**Established by:** ADR 0012
+**Verification:** `git log --oneline` shows one commit per phase boundary, with a phase prefix in the commit message.
+**Expected:** Phases 1–8 each have exactly one commit; the architecture bootstrap has one commit; planning artifacts have one commit. Roughly 10 commits total for the full build.
+**On failure:** If multiple commits exist within a phase, consider squashing before the next phase begins.
