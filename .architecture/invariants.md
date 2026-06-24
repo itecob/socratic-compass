@@ -1,0 +1,87 @@
+# Invariants
+
+What must remain true across changes. Each invariant has an ID, the ADR that established it, a verification command, and an on-failure note.
+
+## INV-001: Every absorbed skill has cross-references rewritten to `compass:`
+**Established by:** ADR 0001
+**Verification:** `! grep -r 'superpowers:' skills/ 2>/dev/null`
+**Expected:** No matches (empty output, exit 0 on the negated grep).
+**On failure:** Re-run the rewrite step for the offending skill; see ADR 0001 and the implementation plan's Phase 4.
+
+## INV-002: Plugin installs and functions on a system without Superpowers
+**Established by:** ADR 0002
+**Verification:** Manual: install in a clean environment and invoke `using-compass`. Automated proxy: every skill referenced by another in `skills/` exists within `skills/` (no external skill references).
+**Expected:** No external dependencies; all referenced skills resolve within the plugin.
+**On failure:** A skill references an external resource; absorb it or remove the reference.
+
+## INV-003: Every hook script exits 0 regardless of detection
+**Established by:** ADR 0003
+**Verification:** `for f in hooks/*.sh; do bash -n "$f" && bash "$f" </dev/null >/dev/null 2>&1; echo "$f exit=$?"; done | grep -v 'exit=0' || echo OK`
+**Expected:** Output is `OK`.
+**On failure:** A hook is blocking. Make it advisory (exit 0).
+
+## INV-004: No skill in this plugin is named `using-superpowers`
+**Established by:** ADR 0004
+**Verification:** `! [ -d skills/using-superpowers ]`
+**Expected:** Directory does not exist.
+**On failure:** Delete or rename; see ADR 0004.
+
+## INV-005: Every absorbed `SKILL.md` ends with the attribution footer
+**Established by:** ADR 0005
+**Verification:** `for s in brainstorming writing-plans executing-plans subagent-driven-development test-driven-development systematic-debugging verification-before-completion requesting-code-review receiving-code-review dispatching-parallel-agents using-git-worktrees finishing-a-development-branch writing-skills using-compass; do grep -q "Source attribution: this skill is adapted from" "skills/$s/SKILL.md" 2>/dev/null || { echo "MISSING: $s"; exit 1; }; done; echo OK`
+**Expected:** Output is `OK`.
+**On failure:** Re-run the attribution footer step (Task 31a in the plan) for the offending skill; see ADR 0005.
+
+## INV-006: Every plan has a corresponding interview transcript
+**Established by:** ADR 0006
+**Verification:** Manual at plan-write time; for plans in `plans/*.md`, check that a transcript from the same date exists in `.architecture/interviews/`.
+**Expected:** Each plan has a matching transcript.
+**On failure:** Back-fill the transcript or explicitly document why the interview was skipped (per the per-task opt-out in `socratic-interview`).
+
+## INV-007: No new invariant from this ADR — premise-check uses INV-006 indirectly
+**Established by:** ADR 0007
+**Verification:** —
+**Expected:** —
+**On failure:** —
+
+## INV-008: Every project has a recorded involvement setting
+**Established by:** ADR 0008
+**Verification:** `grep -q "Initial setting for this project" .architecture/decisions/0008-per-project-involvement.md`
+**Expected:** Match found.
+**On failure:** The involvement setting is missing from ADR 0008. Add it or write an addendum.
+
+## INV-009: Every per-skill mini-interview opens with a scope statement
+**Established by:** ADR 0009
+**Verification:** Manual; agent self-checks each per-skill interview against the rule in ADR 0009 Layer 1.
+**Expected:** Each interview begins with "The plan says this skill exists to do X. We're discussing how, not whether."
+**On failure:** Restart the interview from the scope statement.
+
+## INV-010: Mid-build structural insights produce an ADR or a `scope-deferred.md` entry
+**Established by:** ADR 0009
+**Verification:** Manual; reviewed at each phase boundary.
+**Expected:** No silent absorption of structural drift.
+**On failure:** Audit recent ADRs and the most recent session-handoff; back-fill any uncaptured drift.
+
+## INV-011: Every new skill is built via a mini-interview probing the Skill Build Checklist
+**Established by:** ADR 0010
+**Verification:** Manual; each new skill in `skills/` should have a paragraph in its corresponding section of the relevant session-handoff explaining which checklist areas were probed.
+**Expected:** All nine new skills have such a record.
+**On failure:** Build that skill again via the checklist; archive the previous draft if relevant.
+
+## INV-012: Every phase boundary produces an adversarial subagent evaluation
+**Established by:** ADR 0011
+**Verification:** `ls .architecture/validation/phase-*.md | wc -l` should equal the number of completed phases (1–8).
+**Expected:** One evaluation file per completed phase.
+**On failure:** Run the adversarial subagent dispatch for the missing phase before continuing to the next.
+
+## INV-013: Build success criteria are spec §11's seven criteria, unrevised
+**Established by:** ADR 0011
+**Verification:** `diff specs/2026-06-24-compass-design.md.criteria-snapshot specs/2026-06-24-compass-design.md` (the snapshot file is captured at the start of the build; any change to §11 must produce a supersede ADR).
+**Expected:** No diff in §11, or a supersede ADR explaining the change.
+**On failure:** Either revert the §11 change or write the supersede ADR.
+
+## INV-014: Transferability test runs before declaring the plugin ready to ship
+**Established by:** ADR 0011
+**Verification:** `[ -f .architecture/validation/transferability-*.md ]`
+**Expected:** At least one transferability test result file exists before any "release" or "ship" action.
+**On failure:** Do not ship. Run the transferability test on a non-Compass problem and capture the result.

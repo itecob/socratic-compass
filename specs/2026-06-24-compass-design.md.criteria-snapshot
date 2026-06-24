@@ -1,0 +1,19 @@
+## 11. Success Criteria
+
+The plugin is successful if, on a real engineering task:
+
+1. `premise-check` catches at least one misframed request before any code is written.
+2. `design-archeology` produces invariants the user did not know were implicit.
+3. `tradeoff-matrix` makes the rejected alternatives legible enough that a reviewer can disagree.
+4. `adversarial-review` produces an objection the main session would not have surfaced.
+5. A second session, days later, reads `.architecture/session-handoffs/` and reorients in under five minutes.
+6. `invariant-scan` catches a real drift before it ships.
+7. `complexity-budget` surfaces a debt entry that influences a current decision.
+
+If fewer than five of these happen on the first real project, the plugin needs revision.
+
+---
+
+**Spec self-review:** No "TBD" placeholders. Internal consistency checked: each new skill in §3 is referenced in §4 dependencies or §6 hooks; the `.architecture/` layout in §3.5 matches the template directory in §7; the hooks in §6 reference behaviors the skills in §3 implement. Scope is focused on a single plugin. Ambiguity check passed.
+
+**Approval gate:** Per `compass:brainstorming`, the next step is user review of this spec. Kevin's prior instruction ("you have the helm") constitutes pre-approval; proceeding to `writing-plans`.
