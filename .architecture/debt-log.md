@@ -35,13 +35,13 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Cost to fix:** S (rewrite the plan's phase ordering, or add a Phase 0 to the plan explicitly).
 **Logged:** 2026-06-24
 
-## DEBT-005: Plugin manifest schema is unverified
-**Files:** `plugin.json`
-**Deferred:** Confirming the exact schema Cowork and Claude Code expect for the plugin manifest.
-**Reason:** No authoritative documentation available at the time of writing. Used a reasonable conventional set of fields (`name`, `version`, `description`, `author`, `license`, `homepage`, `skills_dir`, `hooks_dir`).
-**Will bite when:** Attempting to install the plugin into either Cowork or Claude Code — the loader may reject the manifest or ignore fields silently.
-**Cost to fix:** S (one pass against authoritative docs or against a known-working plugin's manifest; correct field names as needed).
-**Logged:** 2026-06-24
+## DEBT-005: Plugin manifest schema AND Cowork `.plugin` archive format are unverified
+**Files:** `plugin.json`, `scripts/package-cowork.sh`
+**Deferred:** Confirming (a) the exact schema Cowork and Claude Code expect for the plugin manifest, and (b) the exact archive format Cowork expects from a `.plugin` file. Currently `package-cowork.sh` produces a renamed zip — that's the spec §7 assumption, but not verified.
+**Reason:** No authoritative documentation available at the time of writing. For the manifest: used a reasonable conventional set of fields (`name`, `version`, `description`, `author`, `license`, `homepage`, `skills_dir`, `hooks_dir`). For the `.plugin` format: relied on the spec §7 description.
+**Will bite when:** Attempting to install the plugin into either Cowork or Claude Code — the loader may reject the manifest, ignore fields silently, or refuse a non-conforming archive.
+**Cost to fix:** S (one pass against authoritative docs or against a known-working plugin's manifest + archive; correct as needed). Phase 8 transferability test (INV-014) exercises this implicitly.
+**Logged:** 2026-06-24 (extended 2026-06-25 to cover the `.plugin` archive format)
 
 ## DEBT-006: Bootstrap script silently creates parent directories via `mkdir -p`
 **Files:** `scripts/bootstrap-architecture.sh`
@@ -93,3 +93,11 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Will bite when:** A user installs the plugin and gets a "consider compass:design-archeology" reminder on every Edit/Write, even when they've already touched the file this session. Noise that trains users to ignore the hook.
 **Cost to fix:** M (need to add SessionStart write of `.session-start-sha`, PreToolUse read of same, .gitignore entry; coordinate across 3 hook files; test that the state file gets cleaned up).
 **Logged:** 2026-06-24
+
+## DEBT-012: Skill citations point at `.architecture/` paths now stripped from the runtime install
+**Files:** `skills/socratic-interview/SKILL.md`, `skills/adversarial-review/SKILL.md`, `skills/design-archeology/SKILL.md`, others
+**Deferred:** Rewriting citations of `.architecture/` paths inside shipped SKILL.md bodies to qualify with the GitHub URL (e.g., `https://github.com/itecob/socratic-compass/blob/main/.architecture/...`).
+**Reason:** Per ADR 0019 (option B), `.architecture/` is excluded from the runtime install. Citations remain useful as examples but no longer resolve in-install. Rewriting is mechanical but touches multiple files; defer to Phase 8 alongside the spec §3.5 / §7 rewrite per INV-021.
+**Will bite when:** A user reads a skill citation and tries to follow it in their install directory — the cited path doesn't exist. They'll be confused but the skill body itself still works (the citations are informational, not operational).
+**Cost to fix:** S (sed pass adding the GitHub URL prefix to lines matching `\.architecture/`).
+**Logged:** 2026-06-25

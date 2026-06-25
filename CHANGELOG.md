@@ -89,7 +89,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 4 concerns surfaced and addressed (set -eu loosened to set -u, pre-tool-use-write header fixed, broken heuristic logged as DEBT-011, phase-validation reminder removed from SessionEnd to respect ADR 0017's "reinforcement, not source" boundary).
 - INV-003 re-verified after fixes: all four hooks exit 0.
 
+### Added (Phase 6 — Packaging, 2026-06-25)
+- `scripts/package-cowork.sh` — produces `dist/compass.plugin` (zip archive) for Cowork install. Stages files in a tmpdir with `umask 022` so shipped entries are world-readable (644) and scripts world-executable (755); `mv -f` into `dist/` to avoid leftover zip temp files on UWP-mounted filesystems.
+- `scripts/package-claude-code.sh` — produces `dist/compass-claude-code/` (plugin directory) for Claude Code install. Uses `rsync -a --delete` so dest mirrors source structurally (stale files from prior runs are removed). Same permission-normalization.
+- `LICENSE` — pure MIT, copyright 2026 itecob.
+- `NOTICE` — upstream attribution to the Superpowers plugin (`https://github.com/anthropic-experimental/superpowers`), with the full list of absorbed skills and which six carry the Compass coupling section.
+- README — added "Building the package" section; phase status updated to Phase 6 Complete; "What Compass does" bullet list completed.
+
+### Added (Phase 6 supporting ADRs and debt, 2026-06-25)
+- ADR 0019: Runtime packages exclude `.architecture/`, `specs/`, `plans/` (option B), the human's override of the main session's option-C recommendation. Documents the consequences (in-install citation breakage, lost worked-example value) and the gains (cleaner transferability test for Phase 8, smaller package, symmetry with upstream Superpowers). Also documents the restoration of `set -euo pipefail` (the Phase 5 `set -u` was specific to hooks per INV-003) and the `umask 022` choice.
+- DEBT-005: extended to cover the Cowork `.plugin` archive format as well as the manifest schema.
+- DEBT-012: in-install citations of `.architecture/` paths inside shipped SKILL.md bodies are dead links post-Option-B. Deferred to Phase 8 spec/citation rewrite alongside INV-021.
+
+### Meta-validation
+- Phase 6 adversarial subagent returned FAIL with 14 concerns. 8 load-bearing concerns addressed in this same commit cycle: README truncation completed, CHANGELOG Phase 6 entry written, ADR 0019 written, `set -euo pipefail` restored, `rsync --delete` added, `mv -f` replaces `cp` to avoid temp leftovers, `umask 022` set, LICENSE URL fixed (`obra/superpowers` → `anthropic-experimental/superpowers`) and attribution moved to a separate `NOTICE` file.
+- Phase 6 validation file at `.architecture/validation/phase-06-2026-06-25-1156.md`.
+- Concerns 8, 10, 13, 14 (cosmetic) acknowledged in the validation file and either fixed or recorded as deferred. The orphaned `dist/ziitB0W1` from the original script's UWP rename-failure persists in the user's `dist/` directory and requires PowerShell `Remove-Item dist/*` to clean (gitignored, will not be committed).
+
 ### Still to come
-- Phase 6: Packaging scripts for both Cowork (.plugin archive) and Claude Code (plugin directory).
 - Phase 7: Dogfood `.architecture/` for the plugin's own design decisions (mostly done in advance during the architecture bootstrap; remaining items to be reconciled at phase boundary).
 - Phase 8: Final verification, including INV-014 transferability test per ADR 0011.

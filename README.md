@@ -4,7 +4,7 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 
 ## Status
 
-**Phase 5 of 8 complete — Hooks shipped.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–5 are complete: the architecture journal, scaffolding, template + bootstrap, all nine new strategic skills, all fourteen absorbed Superpowers workflow skills (with namespace rewrites, attribution footers, and Compass coupling sections on the six skills that participate in the planning/execution pipeline), and four advisory Claude Code hooks (SessionStart, PreToolUse for Edit, PreToolUse for Write, SessionEnd) per ADR 0017 (reinforcement only, not source of truth). The plugin is not yet installable — Phases 6–8 add packaging and verification.
+**Phase 6 of 8 complete — Packaging shipped.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–6 are complete: the architecture journal, scaffolding, template + bootstrap, all nine new strategic skills, all fourteen absorbed Superpowers workflow skills, four advisory Claude Code hooks (per ADR 0017), and two packaging scripts that produce the Cowork `.plugin` archive and the Claude Code plugin directory (per ADR 0019). Phases 7–8 add dogfood reconcile and final verification.
 
 | Phase | Status | Contents |
 |---|---|---|
@@ -14,7 +14,7 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 | 3 (Nine new skills) | Complete | `socratic-interview`, `premise-check`, `design-archeology`, `tradeoff-matrix`, `adversarial-review`, `architecture-journal`, `session-handoff`, `invariant-scan`, `complexity-budget`. |
 | 4 (14 absorbed Superpowers skills) | Complete | Imported verbatim with namespace rewrite + attribution footer. |
 | 5 (Hooks) | Complete | Claude Code `SessionStart`, `PreToolUse`, `SessionEnd` reminders. |
-| 6 (Packaging) | Pending | `package-cowork.sh`, `package-claude-code.sh`. |
+| 6 (Packaging) | Complete | `package-cowork.sh` (zip), `package-claude-code.sh` (rsync). LICENSE + NOTICE added. Runtime excludes `.architecture/`, `specs/`, `plans/` per ADR 0019. |
 | 7 (Dogfood reconcile) | Pending | Reconcile plugin's own `.architecture/` with what was bootstrapped early. |
 | 8 (Final verification) | Pending | Invariant scan + INV-014 transferability test. |
 
@@ -35,4 +35,20 @@ The plugin closes gaps the existing **Superpowers** plugin leaves open in the du
 - `design-archeology` — reads existing code for implicit contracts before any change.
 - `tradeoff-matrix` — forces three or more designs compared on named axes.
 - `adversarial-review` — dispatches a subagent to attack the plan.
-- `arc
+- `architecture-journal` — meta-skill that reads `.architecture/` at session start and prompts to write mid-session.
+- `session-handoff` — structured end-of-session note capturing structural changes and involvement ratio.
+- `invariant-scan` — sweeps `.architecture/invariants.md` and runs each verification command.
+- `complexity-budget` — tracks accumulated shortcuts in `.architecture/debt-log.md`.
+
+Plus fourteen workflow skills absorbed verbatim from Superpowers (eight standalone utilities + six with a Compass-coupling section that introduces mandatory `.architecture/` checks). See `NOTICE` for the full absorbed-skill list and source attribution.
+
+## Building the package
+
+The repository ships build scripts that produce both Cowork and Claude Code packages:
+
+- `bash scripts/package-cowork.sh` → `dist/compass.plugin` (zip archive for Cowork).
+- `bash scripts/package-claude-code.sh` → `dist/compass-claude-code/` (plugin directory for Claude Code).
+
+Both scripts exclude `.architecture/`, `specs/`, `plans/`, `.git/`, `dist/`, `*.bak`, `.gitignore`, and `.DS_Store` from the shipped artifact (per ADR 0019). The plugin's own `.architecture/` remains visible here on GitHub for users who want to read the dogfood ADRs as examples.
+
+Requirements: `bash`, `zip`, `rsync`. On Windows native, Git Bash with optional Unix tools, or WSL, satisfies this.

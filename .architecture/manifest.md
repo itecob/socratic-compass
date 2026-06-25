@@ -53,3 +53,4 @@ The implementation plan lives at `plans/2026-06-24-compass-plan.md`. The design 
 - 0016 — Spec §3.5 amended (formal record only); design-archeology output retains "Existing Design Notes" wrapper name.
 - 0017 — Prerequisite enforcement lives in SKILL.md bodies (cross-platform); hooks are Claude Code-only reinforcement.
 - 0018 — Coupled absorbed skills use the mandatory-check / conditional-action / documented-decision pattern.
+- 0019 — Runtime packages exclude `.architecture/`, `specs/`, `plans/` (option B); LICENSE pure MIT, attribution moved to NOTICE.

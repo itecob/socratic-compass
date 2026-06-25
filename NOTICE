@@ -1,0 +1,37 @@
+Compass — strategic-programming plugin for Claude Code and Cowork
+Copyright (c) 2026 itecob
+Licensed under the MIT License (see LICENSE).
+
+================================================================================
+Upstream attribution
+================================================================================
+
+This plugin absorbs fourteen workflow skills from the Superpowers plugin
+(https://github.com/anthropic-experimental/superpowers), which is also
+MIT-licensed.
+
+Eight skills were absorbed verbatim (with namespace `superpowers:` rewritten
+to `compass:` and prose mentions of "Superpowers" rewritten to "Compass"):
+
+  - test-driven-development
+  - systematic-debugging
+  - verification-before-completion
+  - requesting-code-review
+  - receiving-code-review
+  - dispatching-parallel-agents
+  - using-git-worktrees
+  - writing-skills
+
+Six skills were absorbed with an additional "Compass coupling" section that
+introduces mandatory checks of `.architecture/` artifacts (per ADRs 0017 and
+0018):
+
+  - brainstorming
+  - writing-plans
+  - executing-plans
+  - subagent-driven-development
+  - finishing-a-development-branch
+  - using-compass (renamed from using-superpowers)
+
+Per-skill source attribution is preserved in each absorbed skill's SKILL.md
+footer. The footer is the canonical source-citation for each individual skill.
