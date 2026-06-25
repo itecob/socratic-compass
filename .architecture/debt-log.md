@@ -85,3 +85,11 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Will bite when:** A user audits the spec against the shipped files and finds extras. Or upstream Superpowers adds more companion files; the absorption logic needs an explicit allow/deny list.
 **Cost to fix:** S (decide keep-or-remove; update spec §4 in Phase 8).
 **Logged:** 2026-06-24
+
+## DEBT-011: PreToolUse design-archeology heuristic is broken (session-start SHA is wrong)
+**Files:** `hooks/pre-tool-use-edit.sh`, `hooks/pre-tool-use-write.sh`
+**Deferred:** Fixing the "no commits this session in <dir>" heuristic in the PreToolUse hooks.
+**Reason:** The current implementation uses `git log --reverse --format=%H -n 1` to get the "session start SHA" — but that command returns the OLDEST commit in the repository, not the session start commit. As a result, the heuristic almost always fires (suggesting design-archeology on every file edit) on young repositories. Phase 5 adversarial review caught this. The real fix requires the SessionStart hook to capture `git rev-parse HEAD` into a state file (e.g., `.architecture/.session-start-sha`) and the PreToolUse hook to read it. Non-trivial; defers cleanly.
+**Will bite when:** A user installs the plugin and gets a "consider compass:design-archeology" reminder on every Edit/Write, even when they've already touched the file this session. Noise that trains users to ignore the hook.
+**Cost to fix:** M (need to add SessionStart write of `.session-start-sha`, PreToolUse read of same, .gitignore entry; coordinate across 3 hook files; test that the state file gets cleaned up).
+**Logged:** 2026-06-24

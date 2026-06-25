@@ -75,8 +75,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - INV-024: Coupling sections enforce the discipline-keyword pattern.
 - INV-001 verification refined to exclude attribution-footer false positives (the literal `superpowers:` appears in citations per ADR 0005; intentional).
 
+### Added (Phase 5 — Hooks, 2026-06-24)
+- `hooks/session-start.sh` — prints reminder to invoke `compass:architecture-journal`; lists recent activity in interviews/, premise-checks/, session-handoffs/, validation/ when present.
+- `hooks/pre-tool-use-edit.sh` and `hooks/pre-tool-use-write.sh` — when `$TARGET_FILE` is set: prints debt-log entries that reference the target; checks for `.architecture/design-notes/<path>.md`; recommends `compass:design-archeology` when the target directory hasn't been touched this session.
+- `hooks/session-end.sh` — when working tree has uncommitted changes, recommends `compass:session-handoff`.
+- All hooks: exit 0 always (per ADR 0003); discipline lives in skill bodies, not hooks (per ADR 0017).
+
+### Added (Phase 5 supporting debt, 2026-06-24)
+- DEBT-011: PreToolUse `session_start_sha` heuristic is broken (`git log --reverse` returns oldest commit, not session start). Real fix requires SessionStart to capture HEAD into a state file. Deferred.
+
+### Meta-validation
+- Phase 5 adversarial subagent review captured at `.architecture/validation/phase-05-2026-06-24-2333.md`.
+- 4 concerns surfaced and addressed (set -eu loosened to set -u, pre-tool-use-write header fixed, broken heuristic logged as DEBT-011, phase-validation reminder removed from SessionEnd to respect ADR 0017's "reinforcement, not source" boundary).
+- INV-003 re-verified after fixes: all four hooks exit 0.
+
 ### Still to come
-- Phase 5: Optional Claude Code hooks (reminders, not blockers, per ADR 0003).
 - Phase 6: Packaging scripts for both Cowork (.plugin archive) and Claude Code (plugin directory).
 - Phase 7: Dogfood `.architecture/` for the plugin's own design decisions (mostly done in advance during the architecture bootstrap; remaining items to be reconciled at phase boundary).
 - Phase 8: Final verification, including INV-014 transferability test per ADR 0011.

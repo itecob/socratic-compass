@@ -4,7 +4,7 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 
 ## Status
 
-**Phase 4 of 8 complete — All 23 skills present.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–4 are complete: the architecture journal, scaffolding, template + bootstrap, all nine new strategic skills, and all fourteen absorbed Superpowers workflow skills (with namespace rewrites, attribution footers, and Compass coupling sections on the six skills that participate in the planning/execution pipeline). The plugin is not yet installable — Phases 5–8 add hooks, packaging, and verification.
+**Phase 5 of 8 complete — Hooks shipped.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–5 are complete: the architecture journal, scaffolding, template + bootstrap, all nine new strategic skills, all fourteen absorbed Superpowers workflow skills (with namespace rewrites, attribution footers, and Compass coupling sections on the six skills that participate in the planning/execution pipeline), and four advisory Claude Code hooks (SessionStart, PreToolUse for Edit, PreToolUse for Write, SessionEnd) per ADR 0017 (reinforcement only, not source of truth). The plugin is not yet installable — Phases 6–8 add packaging and verification.
 
 | Phase | Status | Contents |
 |---|---|---|
@@ -13,7 +13,7 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 | 2 (Architecture template) | Complete | `templates/architecture/` files that `bootstrap-architecture.sh` copies into user projects. |
 | 3 (Nine new skills) | Complete | `socratic-interview`, `premise-check`, `design-archeology`, `tradeoff-matrix`, `adversarial-review`, `architecture-journal`, `session-handoff`, `invariant-scan`, `complexity-budget`. |
 | 4 (14 absorbed Superpowers skills) | Complete | Imported verbatim with namespace rewrite + attribution footer. |
-| 5 (Hooks) | Pending | Claude Code `SessionStart`, `PreToolUse`, `SessionEnd` reminders. |
+| 5 (Hooks) | Complete | Claude Code `SessionStart`, `PreToolUse`, `SessionEnd` reminders. |
 | 6 (Packaging) | Pending | `package-cowork.sh`, `package-claude-code.sh`. |
 | 7 (Dogfood reconcile) | Pending | Reconcile plugin's own `.architecture/` with what was bootstrapped early. |
 | 8 (Final verification) | Pending | Invariant scan + INV-014 transferability test. |
