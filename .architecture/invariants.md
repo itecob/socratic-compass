@@ -4,8 +4,8 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 
 ## INV-001: Every absorbed skill has cross-references rewritten to `compass:`
 **Established by:** ADR 0001
-**Verification:** `! grep -r 'superpowers:' skills/ 2>/dev/null`
-**Expected:** No matches (empty output, exit 0 on the negated grep).
+**Verification:** `! grep -rEn '\bsuperpowers\b' skills/ 2>/dev/null | grep -vF 'Source attribution' | grep -vF 'anthropic-experimental/superpowers'`
+**Expected:** No matches (empty output, exit 0 on the filtered grep). Two classes of citation are excluded as intentional: attribution-footer lines that cite the original namespace, and lines containing the upstream GitHub URL fragment `anthropic-experimental/superpowers`. The verification now catches both `superpowers:` (namespace prefix) and bare `superpowers` (path component), which the original rewrite missed (caught by Phase 4 adversarial review).
 **On failure:** Re-run the rewrite step for the offending skill; see ADR 0001 and the implementation plan's Phase 4.
 
 ## INV-002: Plugin installs and functions on a system without Superpowers
@@ -133,3 +133,15 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 **Verification:** At Phase 8, `grep -E "(Implicit Contracts|Implications for the Proposed Change)" specs/2026-06-24-compass-design.md` returns matches.
 **Expected:** §3.3 lists the four sub-sections.
 **On failure:** Do not tag. Rewrite §3.3 per ADR 0016 Part 2.
+
+## INV-023: Every coupled absorbed skill carries a "Compass coupling" section in its SKILL.md body
+**Established by:** ADR 0017
+**Verification:** `grep -l "Compass coupling" skills/brainstorming/SKILL.md skills/writing-plans/SKILL.md skills/executing-plans/SKILL.md skills/subagent-driven-development/SKILL.md skills/finishing-a-development-branch/SKILL.md skills/using-compass/SKILL.md 2>/dev/null | wc -l`
+**Expected:** Output is `6`.
+**On failure:** Re-add the missing coupling section per ADR 0018's table.
+
+## INV-024: Coupled skills' coupling sections instruct the agent to perform the check and document the decision
+**Established by:** ADR 0018
+**Verification:** For each of the 6 coupled skills, `grep -E "(mandatory|must check|document.*decision)" skills/<name>/SKILL.md` returns at least one match.
+**Expected:** All 6 coupled skills satisfy the discipline-keyword check.
+**On failure:** Strengthen the coupling section's language to make the check mandatory and the decision documented (per ADR 0018).

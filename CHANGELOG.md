@@ -61,8 +61,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Three SKILL.md frontmatter descriptions tightened to comply with `writing-skills`' no-workflow-summary rule (the plugin must apply its own discipline to itself).
 - `socratic-interview` scope-statement step softened for first-interview-no-plan-yet cases.
 
+### Added (Phase 4 — Fourteen absorbed Superpowers skills, 2026-06-24)
+- **Eight verbatim absorptions** (standalone utilities): `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `using-git-worktrees`, `writing-skills`. Each: copy → `superpowers:` → `compass:` namespace rewrite + `Superpowers` → `Compass` prose rewrite + attribution footer.
+- **Six coupled absorptions** (planning/execution pipeline): `brainstorming`, `writing-plans`, `executing-plans`, `subagent-driven-development`, `finishing-a-development-branch`, `using-compass` (renamed from `using-superpowers`). Each: standard absorption + a Compass coupling section in the SKILL.md body that introduces mandatory checks of `.architecture/` artifacts per ADRs 0017 and 0018.
+- **Companion files copied**: per-skill prompts, references, and templates (`testing-anti-patterns.md`, `root-cause-tracing.md`, `defense-in-depth.md`, `condition-based-waiting.md`, `code-reviewer.md`, `implementer-prompt.md`, `spec-reviewer-prompt.md`, `code-quality-reviewer-prompt.md`, `visual-companion.md`, `anthropic-best-practices.md`, `persuasion-principles.md`, `testing-skills-with-subagents.md`, `graphviz-conventions.dot`, `render-graphs.js`, and the brainstorming + writing-plans reviewer prompts).
+- All cross-references to `superpowers:` rewritten to `compass:`; all prose mentions of "Superpowers" as a plugin name rewritten to "Compass"; attribution footer on every absorbed `SKILL.md` cites the upstream source.
+- 23 of 23 SKILL.md files now exist (9 new + 14 absorbed).
+
+### Added (Phase 4 supporting ADRs and invariants, 2026-06-24)
+- ADR 0017: Cross-platform parity for prerequisite enforcement — discipline lives in SKILL.md bodies (works on Cowork and Code); hooks are Claude Code-only reinforcement.
+- ADR 0018: Mandatory-check / conditional-action / documented-decision pattern for coupled absorbed skills.
+- INV-023: All 6 coupled skills carry a "Compass coupling" section.
+- INV-024: Coupling sections enforce the discipline-keyword pattern.
+- INV-001 verification refined to exclude attribution-footer false positives (the literal `superpowers:` appears in citations per ADR 0005; intentional).
+
 ### Still to come
-- Phase 4: The fourteen absorbed Superpowers skills, with namespace rewrites and attribution footers per ADRs 0001/0005.
 - Phase 5: Optional Claude Code hooks (reminders, not blockers, per ADR 0003).
 - Phase 6: Packaging scripts for both Cowork (.plugin archive) and Claude Code (plugin directory).
 - Phase 7: Dogfood `.architecture/` for the plugin's own design decisions (mostly done in advance during the architecture bootstrap; remaining items to be reconciled at phase boundary).

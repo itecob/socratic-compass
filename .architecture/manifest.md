@@ -51,3 +51,5 @@ The implementation plan lives at `plans/2026-06-24-compass-plan.md`. The design 
 - 0014 — Premise-check outputs persist to `.architecture/premise-checks/`.
 - 0015 — Design-archeology outputs persist to `.architecture/design-notes/<source-path>.md`.
 - 0016 — Spec §3.5 amended (formal record only); design-archeology output retains "Existing Design Notes" wrapper name.
+- 0017 — Prerequisite enforcement lives in SKILL.md bodies (cross-platform); hooks are Claude Code-only reinforcement.
+- 0018 — Coupled absorbed skills use the mandatory-check / conditional-action / documented-decision pattern.

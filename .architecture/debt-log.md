@@ -69,3 +69,19 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Will bite when:** They get committed (currently they're untracked but would be picked up by a `git add -A`); polluted greps; readers confused about which file is canonical.
 **Cost to fix:** Trivial (30 seconds) — `Remove-Item -Force .architecture/manifest.md.bak scripts/bootstrap-architecture.sh.bak templates/architecture/manifest.md.bak` in PowerShell.
 **Logged:** 2026-06-24
+
+## DEBT-009: ADR 0008 (involvement setting) is not in the bootstrap template; coupling gracefully degrades in user projects
+**Files:** `templates/architecture/`, `skills/executing-plans/SKILL.md`, `skills/subagent-driven-development/SKILL.md`
+**Deferred:** Copying ADR 0008 (or a downstream-applicable equivalent) into the bootstrap template so user projects have an involvement setting to read.
+**Reason:** ADR 0008 is plugin-specific (it describes the Compass build's own involvement choices). A downstream user project should declare its own involvement setting via an ADR, not inherit Compass's. But coupling sections in `executing-plans` and `subagent-driven-development` reference ADR 0008 as if it exists in the user's `.architecture/`.
+**Will bite when:** In a user project freshly bootstrapped, the coupling-section's "involvement-setting" check fails to find the ADR. Per ADR 0018's documented-decision leg the agent handles this gracefully (notes the absence and proceeds), but the first user invocation will produce a confusing "could not find ADR 0008" note.
+**Cost to fix:** S (write a generic ADR-0008-template-stub into `templates/architecture/decisions/0008-involvement-setting-example.md` that a user can adopt, or update the coupling sections to reference an abstract "your project's involvement-setting ADR" instead of literal "ADR 0008").
+**Logged:** 2026-06-24
+
+## DEBT-010: Two extra companion files absorbed beyond spec §4 table
+**Files:** `skills/brainstorming/spec-document-reviewer-prompt.md`, `skills/writing-plans/plan-document-reviewer-prompt.md`
+**Deferred:** Either (a) removing them, or (b) amending spec §4 to list them.
+**Reason:** The Phase 4 absorption copied all companion files from each upstream skill directory, not only the ones listed in spec §4. These two are real upstream templates (reviewer-prompt files); they contain Compass-aligned content after the rewrite pass; they are harmless if kept and informative-but-undocumented if so. The spec §4 rewrite for Phase 8 (per INV-021) should address this.
+**Will bite when:** A user audits the spec against the shipped files and finds extras. Or upstream Superpowers adds more companion files; the absorption logic needs an explicit allow/deny list.
+**Cost to fix:** S (decide keep-or-remove; update spec §4 in Phase 8).
+**Logged:** 2026-06-24
