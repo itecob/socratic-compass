@@ -4,14 +4,14 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 
 ## Status
 
-**Phase 1 of 8 complete — Scaffolding.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). The repository is not yet installable as a plugin — the skills, hooks, and packaging scripts arrive in subsequent phases.
+**Phase 3 of 8 complete — Nine new strategic skills.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–3 are complete: the architecture journal, scaffolding, template + bootstrap, and all nine new strategic skills exist. The plugin is not yet installable — Phase 4 absorbs the Superpowers workflow skills; Phases 5–8 add hooks, packaging, and verification.
 
 | Phase | Status | Contents |
 |---|---|---|
 | 0 (Architecture bootstrap) | Complete | `.architecture/` — interview transcript, ADRs 0001–0011, invariants, conventions, debt log, scope deferred, validation. Done out of plan order; see `DEBT-004`. |
 | 1 (Scaffolding) | Complete | Directory skeleton, `plugin.json`, README, CHANGELOG. |
-| 2 (Architecture template) | Pending | `templates/architecture/` files that `bootstrap-architecture.sh` copies into user projects. |
-| 3 (Nine new skills) | Pending | `socratic-interview`, `premise-check`, `design-archeology`, `tradeoff-matrix`, `adversarial-review`, `architecture-journal`, `session-handoff`, `invariant-scan`, `complexity-budget`. |
+| 2 (Architecture template) | Complete | `templates/architecture/` files that `bootstrap-architecture.sh` copies into user projects. |
+| 3 (Nine new skills) | Complete | `socratic-interview`, `premise-check`, `design-archeology`, `tradeoff-matrix`, `adversarial-review`, `architecture-journal`, `session-handoff`, `invariant-scan`, `complexity-budget`. |
 | 4 (14 absorbed Superpowers skills) | Pending | Imported verbatim with namespace rewrite + attribution footer. |
 | 5 (Hooks) | Pending | Claude Code `SessionStart`, `PreToolUse`, `SessionEnd` reminders. |
 | 6 (Packaging) | Pending | `package-cowork.sh`, `package-claude-code.sh`. |
@@ -35,25 +35,4 @@ The plugin closes gaps the existing **Superpowers** plugin leaves open in the du
 - `design-archeology` — reads existing code for implicit contracts before any change.
 - `tradeoff-matrix` — forces three or more designs compared on named axes.
 - `adversarial-review` — dispatches a subagent to attack the plan.
-- `architecture-journal` — manages a per-project `.architecture/` directory (ADRs, invariants, conventions, debt log, interview transcripts, session handoffs).
-- `session-handoff` — structured end-of-session note for the next session.
-- `invariant-scan` — verifies documented invariants still hold.
-- `complexity-budget` — tracks and surfaces accumulated shortcuts.
-
-Plus fourteen workflow skills absorbed from Superpowers (TDD, debugging, code review, planning, etc.) so the plugin works standalone.
-
-## Naming
-
-- **Repository:** `socratic-compass` (this repo).
-- **Plugin:** `compass` (declared in `plugin.json`).
-- **Skill namespace:** `compass:` (e.g., `compass:socratic-interview`).
-
-The repository name reflects the philosophy — Socratic interview drives the planning — while the plugin namespace stays short and readable.
-
-## Attribution
-
-Fourteen of the twenty-three skills are adapted from the [Superpowers](https://github.com/anthropic-experimental/superpowers) plugin with namespace rewrites and labeled source-attribution footers. The underlying TDD-for-documentation discipline, rationalization tables, red-flag patterns, and workflow choreography all originated with Superpowers. The nine new skills (`socratic-interview`, `premise-check`, `design-archeology`, `tradeoff-matrix`, `adversarial-review`, `architecture-journal`, `session-handoff`, `invariant-scan`, `complexity-budget`) are original to Compass.
-
-## License
-
-MIT (see LICENSE when added).
+- `arc

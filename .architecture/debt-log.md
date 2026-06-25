@@ -50,5 +50,22 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Will bite when:** A user runs the bootstrap with a misspelled path; the script succeeds, but the `.architecture/` lands somewhere unexpected.
 **Cost to fix:** S (three-line pre-check; no design impact).
 **Logged:** 2026-06-24
-ct).
+
+## DEBT-007: Three invariants are unverifiable as written (INV-002, INV-007, INV-008)
+**Files:** `.architecture/invariants.md`
+**Deferred:** Cleaning up three pre-Phase-3 invariants flagged by the Phase 3 adversarial review:
+- INV-002 uses prose "Manual: install in a clean environment..." instead of the literal `manual` token that `compass:invariant-scan` recognizes.
+- INV-007 has `Verification: —, Expected: —, On failure: —` — it's not a real invariant; should be deleted or marked informational.
+- INV-008's verification grep targets a Compass-build-specific filename; the invariant as worded ("Every project has a recorded involvement setting") is supposed to generalize to downstream projects but the verification doesn't.
+**Reason:** Pre-Phase-3 problems; Phase 3 added enough new invariants that the broken ones now stand out. Fixing requires per-invariant judgment (delete vs reword vs generalize).
+**Will bite when:** `compass:invariant-scan` runs against this project; INV-007 returns BROKEN_VERIFICATION; INV-002 silently skips; INV-008 returns a fragile pass.
+**Cost to fix:** S (15 minutes; three small edits).
+**Logged:** 2026-06-24
+
+## DEBT-008: Stale `.bak` files in the working tree
+**Files:** `.architecture/manifest.md.bak`, `scripts/bootstrap-architecture.sh.bak`, `templates/architecture/manifest.md.bak`
+**Deferred:** Deleting them. Sandbox rm fails with "Operation not permitted" on the mounted Windows folder.
+**Reason:** UWP packaged-app filesystem quirk. User-side `Remove-Item` from PowerShell works; sandbox-side `rm` doesn't.
+**Will bite when:** They get committed (currently they're untracked but would be picked up by a `git add -A`); polluted greps; readers confused about which file is canonical.
+**Cost to fix:** Trivial (30 seconds) — `Remove-Item -Force .architecture/manifest.md.bak scripts/bootstrap-architecture.sh.bak templates/architecture/manifest.md.bak` in PowerShell.
 **Logged:** 2026-06-24

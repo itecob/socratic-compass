@@ -10,6 +10,8 @@ This directory is the project's architectural memory. Claude reads it at session
 - `debt-log.md` — known shortcuts, where they will bite, when to revisit.
 - `scope-deferred.md` — mid-build insights that are out of scope right now but might matter later (per ADR 0009).
 - `interviews/` — socratic-interview transcripts. One per planning session. Authored by the human, hardened by the agent.
+- `premise-checks/` — `compass:premise-check` reports. One per planning cycle. Parallel to interviews/.
+- `design-notes/` — `compass:design-archeology` outputs, mirroring source tree at `<path>.md`. Per ADR 0015.
 - `session-handoffs/` — time-ordered notes written at the end of each session by the agent.
 - `validation/` — adversarial subagent evaluations at each phase boundary, plus the end-of-build transferability test (per ADR 0011).
 
@@ -46,3 +48,6 @@ The implementation plan lives at `plans/2026-06-24-compass-plan.md`. The design 
 - 0011 — Meta-validation methodology: anchor to spec §11, adversarial subagent per phase, transferability test at end.
 - 0012 — Build-time deviations from the plan: manifest content, README/CHANGELOG progress-document form, commit cadence collapsed to per-phase.
 - 0013 — Extend ADRs 0009 and 0011 mechanisms into the default template for downstream projects (with opt-out).
+- 0014 — Premise-check outputs persist to `.architecture/premise-checks/`.
+- 0015 — Design-archeology outputs persist to `.architecture/design-notes/<source-path>.md`.
+- 0016 — Spec §3.5 amended (formal record only); design-archeology output retains "Existing Design Notes" wrapper name.

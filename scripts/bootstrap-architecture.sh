@@ -41,6 +41,8 @@ Contents:
   - scope-deferred.md   (out-of-scope insights for later)
   - decisions/0001-example.md  (example ADR; replace or supersede with your first real one)
   - interviews/         (placeholder README; first socratic-interview transcript lands here)
+  - premise-checks/    (placeholder README; first premise-check report lands here)
+  - design-notes/      (placeholder README; per-source-file design-archeology outputs land here)
   - session-handoffs/   (placeholder README; first session-handoff lands here)
   - validation/         (placeholder README; phase-boundary adversarial reviews land here)
 

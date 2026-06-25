@@ -109,4 +109,27 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 **Verification:** `grep -c 'Opt-outs' scripts/bootstrap-architecture.sh`
 **Expected:** Output is `1` or more.
 **On failure:** Restore the Opt-outs section to the script's heredoc'd "Recommended next steps" output.
-t-outs paragraph to the script's heredoc'd "Recommended next steps" output.
+
+## INV-019: Every `compass:premise-check` invocation produces a file in `.architecture/premise-checks/`
+**Established by:** ADR 0014
+**Verification:** At session-handoff time, the count of files in `.architecture/premise-checks/` equals the count of premise-check invocations recorded in the session-handoffs across the project history.
+**Expected:** Counts match.
+**On failure:** Back-fill the missing premise-check artifact(s) from the corresponding interview transcript and session-handoff.
+
+## INV-020: Every `.architecture/design-notes/<path>.md` includes source-path header + "Last verified" SHA line
+**Established by:** ADR 0015
+**Verification:** `for f in .architecture/design-notes/**/*.md; do head -3 "$f" | grep -q "Last verified" || { echo "MISSING header in $f"; exit 1; }; done; echo OK` (or, when no design-notes exist yet, the check passes trivially).
+**Expected:** Output is `OK`.
+**On failure:** Re-run `compass:design-archeology` on the offending source path to regenerate with the correct header.
+
+## INV-021: Spec §3.5 is rewritten before any release tag to include the four post-spec additions
+**Established by:** ADR 0016
+**Verification:** At Phase 8, `grep -E '(scope-deferred|validation/|premise-checks|design-notes)' specs/2026-06-24-compass-design.md | wc -l` should return at least 4.
+**Expected:** All four post-spec directories/files appear in §3.5.
+**On failure:** Do not tag. Rewrite §3.5 to include the additions per ADR 0016's enumerated table.
+
+## INV-022: Spec §3.3 (design-archeology) is rewritten before any release tag to enumerate the four output sub-sections
+**Established by:** ADR 0016
+**Verification:** At Phase 8, `grep -E "(Implicit Contracts|Implications for the Proposed Change)" specs/2026-06-24-compass-design.md` returns matches.
+**Expected:** §3.3 lists the four sub-sections.
+**On failure:** Do not tag. Rewrite §3.3 per ADR 0016 Part 2.
