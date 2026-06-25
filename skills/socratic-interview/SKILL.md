@@ -148,4 +148,4 @@ If you cannot write that transcript at convergence, you skipped a step — go ba
 
 ---
 
-*This skill was authored by the Compass plugin's own first execution session (2026-06-24) using itself as the discipline. The transcript of that meta-application is at `.architecture/interviews/2026-06-24-1717.md` in the Compass plugin repository.*
+*This skill was authored by the Compass plugin's own first execution session (2026-06-24) using itself as the discipline. The transcript of that meta-application is at [`.architecture/interviews/2026-06-24-1717.md`](https://github.com/itecob/socratic-compass/blob/main/.architecture/interviews/2026-06-24-1717.md) in the Compass plugin repository (browse on GitHub per ADR 0019; not shipped).*

@@ -70,15 +70,16 @@ Surfaced by Phase 7 reconcile audit (2026-06-25):
 **Cost to fix:** S (15-30 minutes per invariant; mostly mechanical).
 **Logged:** 2026-06-24 (extended 2026-06-25 by Phase 7 reconcile)
 
-## DEBT-008: Stale `.bak` files in the working tree
+## DEBT-008: (Resolved 2026-06-25) Stale `.bak` files in the working tree
 **Files:** `.architecture/manifest.md.bak`, `scripts/bootstrap-architecture.sh.bak`, `templates/architecture/manifest.md.bak`
-**Deferred:** Deleting them. Sandbox rm fails with "Operation not permitted" on the mounted Windows folder.
+**Deferred:** *(Was: deleting them. Sandbox rm fails with "Operation not permitted" on the mounted Windows folder.)*
 **Reason:** UWP packaged-app filesystem quirk. User-side `Remove-Item` from PowerShell works; sandbox-side `rm` doesn't.
-**Will bite when:** They get committed (currently they're untracked but would be picked up by a `git add -A`); polluted greps; readers confused about which file is canonical.
-**Cost to fix:** Trivial (30 seconds) — `Remove-Item -Force .architecture/manifest.md.bak scripts/bootstrap-architecture.sh.bak templates/architecture/manifest.md.bak` in PowerShell.
+**Will bite when:** *(Was a risk; now resolved.)*
+**Cost to fix:** *(Was trivial; now zero.)*
+**Resolved:** 2026-06-25 — Phase 7 reconcile cleanup. The `.bak` files no longer exist in the working tree per user-side PowerShell `Remove-Item`.
 **Logged:** 2026-06-24
 
-## DEBT-009: ADR 0008 (involvement setting) is not in the bootstrap template; coupling gracefully degrades in user projects
+## DEBT-009: (Resolved 2026-06-25) ADR 0008 reference in executing-plans rewritten to handle missing-ADR case gracefully
 **Files:** `templates/architecture/`, `skills/executing-plans/SKILL.md`, `skills/subagent-driven-development/SKILL.md`
 **Deferred:** Copying ADR 0008 (or a downstream-applicable equivalent) into the bootstrap template so user projects have an involvement setting to read.
 **Reason:** ADR 0008 is plugin-specific (it describes the Compass build's own involvement choices). A downstream user project should declare its own involvement setting via an ADR, not inherit Compass's. But coupling sections in `executing-plans` and `subagent-driven-development` reference ADR 0008 as if it exists in the user's `.architecture/`.
@@ -86,7 +87,7 @@ Surfaced by Phase 7 reconcile audit (2026-06-25):
 **Cost to fix:** S (write a generic ADR-0008-template-stub into `templates/architecture/decisions/0008-involvement-setting-example.md` that a user can adopt, or update the coupling sections to reference an abstract "your project's involvement-setting ADR" instead of literal "ADR 0008").
 **Logged:** 2026-06-24
 
-## DEBT-010: Two extra companion files absorbed beyond spec §4 table
+## DEBT-010: (Resolved 2026-06-25) Spec §4 table updated to include `spec-document-reviewer-prompt.md` and `plan-document-reviewer-prompt.md`
 **Files:** `skills/brainstorming/spec-document-reviewer-prompt.md`, `skills/writing-plans/plan-document-reviewer-prompt.md`
 **Deferred:** Either (a) removing them, or (b) amending spec §4 to list them.
 **Reason:** The Phase 4 absorption copied all companion files from each upstream skill directory, not only the ones listed in spec §4. These two are real upstream templates (reviewer-prompt files); they contain Compass-aligned content after the rewrite pass; they are harmless if kept and informative-but-undocumented if so. The spec §4 rewrite for Phase 8 (per INV-021) should address this.
@@ -108,4 +109,12 @@ Surfaced by Phase 7 reconcile audit (2026-06-25):
 **Reason:** Per ADR 0019 (option B), `.architecture/` is excluded from the runtime install. Citations remain useful as examples but no longer resolve in-install. Rewriting is mechanical but touches multiple files; defer to Phase 8 alongside the spec §3.5 / §7 rewrite per INV-021.
 **Will bite when:** A user reads a skill citation and tries to follow it in their install directory — the cited path doesn't exist. They'll be confused but the skill body itself still works (the citations are informational, not operational).
 **Cost to fix:** S (sed pass adding the GitHub URL prefix to lines matching `\.architecture/`).
+**Logged:** 2026-06-25
+
+## DEBT-013: Transferability test was synthetic (agent played both sides)
+**Files:** `.architecture/validation/transferability-2026-06-25.md`
+**Deferred:** Re-running the INV-014 transferability test with a real-user interview rather than a synthesized "Maya" persona.
+**Reason:** Build session time pressure; the synthetic version exercises the discipline mechanically but a real-user interview is the gold-standard methodology per ADR 0011. Human ratified synthetic as acceptable for v0.1.0 with this debt logged for v0.1.1 follow-up.
+**Will bite when:** Outside reader reviews the transferability test result, notices the synthetic limitation, and questions whether the plugin actually works for real users. Or: a real-user re-run surfaces a discipline gap the synthetic run masked.
+**Cost to fix:** M (30-45 minutes of a real user's time stepping through socratic-interview questions on a new non-Compass problem, plus 15 minutes of subsequent skills, plus documenting the result).
 **Logged:** 2026-06-25

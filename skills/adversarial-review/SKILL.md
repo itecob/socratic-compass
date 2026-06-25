@@ -137,4 +137,4 @@ No phase advances without a real attack on it first. Subagent dispatch, fresh co
 
 ---
 
-*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The mechanism is established by ADR 0011. The first two times it was applied — to Phase 1 and Phase 2 of the Compass build itself — are at `.architecture/validation/phase-01-2026-06-24-1836.md` and `.architecture/validation/phase-02-2026-06-24-2014.md` in the Compass plugin repository.*
+*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The mechanism is established by ADR 0011. The first two times it was applied — to Phase 1 and Phase 2 of the Compass build itself — are at `https://github.com/itecob/socratic-compass/blob/main/.architecture/validation/phase-01-2026-06-24-1836.md` and `https://github.com/itecob/socratic-compass/blob/main/.architecture/validation/phase-02-2026-06-24-2014.md` (the plugin's own `.architecture/` is not shipped in the runtime package per ADR 0019; browse on GitHub).*

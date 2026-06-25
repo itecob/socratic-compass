@@ -124,4 +124,4 @@ Read at start (selectively). Write on every structural decision. Hand off at end
 
 ---
 
-*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The journal it manages is at `.architecture/` in the Compass plugin repository — the plugin uses itself on itself.*
+*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The journal it manages is at [`.architecture/`](https://github.com/itecob/socratic-compass/blob/main/.architecture/) in the Compass plugin repository (browse on GitHub; the plugin's own `.architecture/` is not shipped in the runtime package per ADR 0019). The plugin uses itself on itself.*

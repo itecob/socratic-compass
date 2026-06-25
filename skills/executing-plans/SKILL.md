@@ -75,7 +75,7 @@ This skill executes a plan; before any execution begins, you must perform these 
 
 1. **The plan itself.** Read it completely. Identify tasks that touch files referenced in `.architecture/debt-log.md`.
 2. **`debt-log.md` for touched files.** For each file the plan will modify, grep `.architecture/debt-log.md` for the file path. Surface any existing debt entries before executing; the human should know what known issues exist in the area being touched.
-3. **Involvement setting from ADR 0008.** Read `.architecture/decisions/0008-per-project-involvement.md` for the current involvement setting (high oversight / phase-level / hands-off / hybrid). Use this to determine how often to check in with the human during execution.
+3. **Involvement setting from ADR 0008.** Read the project's involvement-setting ADR (typically named `.architecture/decisions/0008-per-project-involvement.md` if the user adopted the Compass template stub, but may use a different ADR number or filename in projects that didn't). If no such ADR exists, default to phase-level check-ins and note the absence per ADR 0018's documented-decision pattern. Use the setting to determine how often to check in with the human during execution.
 4. **Adversarial-review verdict (if available).** If `.architecture/validation/` has a recent adversarial-review of the plan being executed, read it. Address any unresolved concerns before continuing.
 
 Document the result before beginning execution; surface any debt or unresolved concerns to the human first.

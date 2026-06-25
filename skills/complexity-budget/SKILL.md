@@ -98,4 +98,4 @@ Log it when you take it. Read it when you touch it. Review it periodically. Neve
 
 ---
 
-*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The plugin's own debt log at `.architecture/debt-log.md` has six entries as of the end of Phase 3, including DEBT-003 (resolved) demonstrating the close-without-delete pattern.*
+*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The plugin's own [debt log](https://github.com/itecob/socratic-compass/blob/main/.architecture/debt-log.md) (browsable on GitHub per ADR 0019; not shipped) has twelve entries as of the end of Phase 8, including DEBT-003 (resolved) demonstrating the close-without-delete pattern.*

@@ -89,12 +89,14 @@ Each is a single SKILL.md with the YAML frontmatter and structure required by th
 
 **Process:**
 1. Read the file and its direct dependents.
-2. Name the implicit contracts (what callers rely on that isn't enforced by the type system).
-3. List invariants the code currently preserves.
-4. Surface smells: long files, tangled responsibilities, hidden state.
-5. Output an "Existing Design Notes" block that becomes input to brainstorming or planning.
+2. Produce an **Existing Design Notes** block (the persisted output, named for compatibility with downstream consumers). The block has four sub-sections:
+   - **Implicit Contracts** — what callers rely on that isn't enforced by the type system or the docstring.
+   - **Invariants Preserved** — invariants the code currently preserves (whether or not they're documented).
+   - **Smells** — long files, tangled responsibilities, hidden state, unclear ownership.
+   - **Implications for the Proposed Change** — how the prior three sub-sections affect the change at hand (added per ADR 0016 Part 2; focuses the design notes on the change rather than leaving the consumer to derive implications).
+3. Persist the block to `.architecture/design-notes/<source-path>.md` with a "Last verified: <SHA>" header (per ADR 0015). The block becomes input to brainstorming or planning.
 
-**Closes gap:** Nothing in the current workflow forces understanding before changing.
+**Closes gap:** Nothing in the current workflow forces understanding before changing. The four-sub-section structure (sub-section 4 in particular) ensures the design notes drive the change rather than sit alongside it.
 
 ### 3.4 `tradeoff-matrix`
 
@@ -150,10 +152,18 @@ Each is a single SKILL.md with the YAML frontmatter and structure required by th
   invariants.md         # What must remain true; each invariant has an ID
   conventions.md        # Non-obvious idioms a newcomer would not infer
   debt-log.md           # Known shortcuts, where they will bite, when to revisit
+  scope-deferred.md     # Mid-build insights out of scope right now (per ADR 0009)
   interviews/           # Socratic-interview transcripts; one per planning session
     YYYY-MM-DD-HHMM.md
+  premise-checks/       # premise-check reports (per ADR 0014); parallel to interviews/
+    YYYY-MM-DD-HHMM.md
+  design-notes/         # design-archeology outputs (per ADR 0015), mirroring source tree
+    <source-path>.md    # Includes "Last verified: <SHA>" header
   session-handoffs/     # Time-ordered structured notes from prior sessions
     YYYY-MM-DD-HHMM.md
+  validation/           # Phase-boundary adversarial subagent evaluations (per ADR 0011)
+    phase-NN-YYYY-MM-DD-HHMM.md
+    transferability-YYYY-MM-DD.md
 ```
 
 **ADR template (each file):**
@@ -253,8 +263,8 @@ To make the plugin standalone, the following Superpowers skills are absorbed ver
 | Absorbed skill | Why needed | Companion files to bundle |
 |---|---|---|
 | `using-superpowers` | Meta-skill that ties the others together; renamed to `using-compass` | — |
-| `brainstorming` | Design exploration before planning | `visual-companion.md` (optional) |
-| `writing-plans` | Plan structure with bite-sized tasks | — |
+| `brainstorming` | Design exploration before planning | `visual-companion.md` (optional), `spec-document-reviewer-prompt.md` |
+| `writing-plans` | Plan structure with bite-sized tasks | —, `plan-document-reviewer-prompt.md` |
 | `executing-plans` | Plan execution without subagents | — |
 | `subagent-driven-development` | Plan execution with subagents (preferred) | `implementer-prompt.md`, `spec-reviewer-prompt.md`, `code-quality-reviewer-prompt.md` |
 | `test-driven-development` | Interface-first implementation | `testing-anti-patterns.md` |

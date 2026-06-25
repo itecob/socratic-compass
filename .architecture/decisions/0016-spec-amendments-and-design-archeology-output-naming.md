@@ -14,7 +14,7 @@ Both are silent spec deviations per INV-010 — they need explicit ADR coverage.
 
 ## Decision
 
-### Part 1 — Spec §3.5 amendment (formal acknowledgment, no spec file edit)
+### Part 1 — Spec §3.6 amendment (formal acknowledgment, no spec file edit)
 
 This ADR is the canonical record of the additions. The spec file itself is **not** edited (per ADR 0011 / INV-013, spec §11 success criteria are locked, and amending one section opens precedent for amending others mid-build). Instead, this ADR explicitly enumerates the post-spec schema:
 
@@ -25,7 +25,7 @@ This ADR is the canonical record of the additions. The spec file itself is **not
 | `.architecture/premise-checks/` | ADR 0014 | Build session 2026-06-24 |
 | `.architecture/design-notes/` | ADR 0015 | Build session 2026-06-24 |
 
-At Phase 8 (final verification), spec §3.5 will be rewritten to incorporate these additions before any release tag, per INV-015's parallel pattern for README/CHANGELOG. Until then, this ADR is the authoritative schema reference; the spec is the *original* schema reference. New readers should consult both.
+At Phase 8 (final verification), spec §3.6 will be rewritten to incorporate these additions before any release tag, per INV-015's parallel pattern for README/CHANGELOG. Until then, this ADR is the authoritative schema reference; the spec is the *original* schema reference. New readers should consult both.
 
 ### Part 2 — design-archeology output naming
 
@@ -47,5 +47,5 @@ Downstream skills consuming design-notes by name will look for the block; the SK
 
 ## Invariants this creates
 
-- **INV-021:** Spec §3.5 is rewritten before any release tag to include the four post-spec additions (`scope-deferred.md`, `validation/`, `premise-checks/`, `design-notes/`). Verification: at Phase 8, `grep` spec §3.5 for each new directory; all must appear. Failure means do not tag.
+- **INV-021:** Spec §3.5 is rewritten before any release tag to include the four post-spec additions (`scope-deferred.md`, `validation/`, `premise-checks/`, `design-notes/`). Verification: at Phase 8, `grep` spec §3.6 for each new directory; all must appear. Failure means do not tag.
 - **INV-022:** Spec §3.3's "Existing Design Notes" block is rewritten to enumerate the four sub-sections. Verification: at Phase 8, `grep` spec §3.3 for "Implications for the Proposed Change" (or the renamed equivalent).

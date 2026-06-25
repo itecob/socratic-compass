@@ -30,14 +30,13 @@ if [ -f "$NOTES" ]; then
   echo "[compass] Design-notes exist for $TARGET: $NOTES"
   echo "[compass]   compass:design-archeology should verify the SHA before consuming."
 else
-  # Heuristic: if no commit in this session has touched this file's directory, suggest design-archeology
-  dir=$(dirname "$TARGET")
-  session_start_sha=$(git log --reverse --format=%H -n 1 2>/dev/null || echo "")
-  if [ -n "$session_start_sha" ]; then
-    if ! git log "$session_start_sha"..HEAD --name-only --format= -- "$dir" 2>/dev/null | grep -q .; then
-      echo "[compass] No commits this session in $dir. Consider compass:design-archeology before editing $TARGET."
-    fi
-  fi
+  # DEBT-011: session-touched-directory heuristic disabled for v0.1.0.
+  # The original logic used `git log --reverse --format=%H -n 1` which returns
+  # the OLDEST commit in the repo (not the session start), so the check almost
+  # always fired and trained users to ignore the hook. Real fix requires
+  # SessionStart to capture HEAD into `.architecture/.session-start-sha` and
+  # PreToolUse to read it. Deferred to v0.1.1.
+  :
 fi
 
 exit 0

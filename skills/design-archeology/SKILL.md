@@ -140,4 +140,4 @@ Four outputs. Every file. Before any edit. Persisted with SHA. Consumed with SHA
 
 ---
 
-*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The `.architecture/design-notes/` directory mechanism is established by ADR 0015 in the Compass plugin's `.architecture/decisions/`.*
+*This skill was authored by the Compass plugin's own first execution session (2026-06-24). The `.architecture/design-notes/` directory mechanism is established by [ADR 0015](https://github.com/itecob/socratic-compass/blob/main/.architecture/decisions/0015-design-archeology-output-persistence.md) in the Compass plugin's [`.architecture/decisions/`](https://github.com/itecob/socratic-compass/blob/main/.architecture/decisions/) (browsable on GitHub; not shipped per ADR 0019).*

@@ -159,4 +159,4 @@ Five outputs. Always. Interview-derived (1–3), journal-cross-referenced (4), t
 
 ---
 
-*This skill was authored by the Compass plugin's own first execution session (2026-06-24) using itself as the discipline. The first premise-check it ran against itself is back-filled at `.architecture/premise-checks/2026-06-24-1731.md` in the Compass plugin repository.*
+*This skill was authored by the Compass plugin's own first execution session (2026-06-24) using itself as the discipline. The first premise-check it ran against itself is back-filled at [`.architecture/premise-checks/2026-06-24-1731.md`](https://github.com/itecob/socratic-compass/blob/main/.architecture/premise-checks/2026-06-24-1731.md) in the Compass plugin repository (browse on GitHub per ADR 0019; not shipped).*
