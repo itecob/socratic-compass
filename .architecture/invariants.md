@@ -34,8 +34,8 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 
 ## INV-006: Every plan has a corresponding interview transcript
 **Established by:** ADR 0006
-**Verification:** Manual at plan-write time; for plans in `plans/*.md`, check that a transcript from the same date exists in `.architecture/interviews/`.
-**Expected:** Each plan has a matching transcript.
+**Verification:** `for plan in plans/*.md; do d=$(basename "$plan" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}'); [ -n "$d" ] && ls .architecture/interviews/${d}*.md >/dev/null 2>&1 || { echo "MISSING interview for $plan (date $d)"; exit 1; }; done; echo OK`
+**Expected:** Output is `OK`.
 **On failure:** Back-fill the transcript or explicitly document why the interview was skipped (per the per-task opt-out in `socratic-interview`).
 
 ## INV-007: No new invariant from this ADR — premise-check uses INV-006 indirectly
@@ -76,8 +76,8 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 
 ## INV-013: Build success criteria are spec §11's seven criteria, unrevised
 **Established by:** ADR 0011
-**Verification:** `diff specs/2026-06-24-compass-design.md.criteria-snapshot specs/2026-06-24-compass-design.md` (the snapshot file is captured at the start of the build; any change to §11 must produce a supersede ADR).
-**Expected:** No diff in §11, or a supersede ADR explaining the change.
+**Verification:** `awk '/^## 11\./,/^## 12\./' specs/2026-06-24-compass-design.md | diff -q - specs/2026-06-24-compass-design.md.criteria-snapshot`
+**Expected:** Empty diff output (the awk-extracted §11 matches the snapshot). On any output, a supersede ADR must exist explaining the §11 change.
 **On failure:** Either revert the §11 change or write the supersede ADR.
 
 ## INV-014: Transferability test runs before declaring the plugin ready to ship

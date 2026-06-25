@@ -51,16 +51,24 @@ Known shortcuts in this repository. Each entry has files affected, what was defe
 **Cost to fix:** S (three-line pre-check; no design impact).
 **Logged:** 2026-06-24
 
-## DEBT-007: Three invariants are unverifiable as written (INV-002, INV-007, INV-008)
+## DEBT-007: Multiple invariants are unverifiable as written
 **Files:** `.architecture/invariants.md`
-**Deferred:** Cleaning up three pre-Phase-3 invariants flagged by the Phase 3 adversarial review:
+**Deferred:** Cleaning up invariants whose verification commands are prose, broken, or don't run automatically. Pre-Phase-3 originals flagged by Phase 3 adversarial review, plus additional items surfaced by the Phase 7 reconcile audit:
+
+Original three (logged 2026-06-24):
 - INV-002 uses prose "Manual: install in a clean environment..." instead of the literal `manual` token that `compass:invariant-scan` recognizes.
 - INV-007 has `Verification: —, Expected: —, On failure: —` — it's not a real invariant; should be deleted or marked informational.
 - INV-008's verification grep targets a Compass-build-specific filename; the invariant as worded ("Every project has a recorded involvement setting") is supposed to generalize to downstream projects but the verification doesn't.
-**Reason:** Pre-Phase-3 problems; Phase 3 added enough new invariants that the broken ones now stand out. Fixing requires per-invariant judgment (delete vs reword vs generalize).
-**Will bite when:** `compass:invariant-scan` runs against this project; INV-007 returns BROKEN_VERIFICATION; INV-002 silently skips; INV-008 returns a fragile pass.
-**Cost to fix:** S (15 minutes; three small edits).
-**Logged:** 2026-06-24
+
+Surfaced by Phase 7 reconcile audit (2026-06-25):
+- INV-009, INV-010, INV-011, INV-020 are labeled "Manual" in prose without the literal `manual:` token that `invariant-scan` recognizes; they will silently skip rather than verify or fail.
+- INV-006 — *resolved 2026-06-25* — verification command was broken bash (`for plan in docs/*/plans/*.md 2>/dev/null; do …` is not valid syntax and `docs/` does not exist). Rewritten to a working shell loop over `plans/*.md` matched against `.architecture/interviews/`. Verified passing.
+- INV-013 — *resolved 2026-06-25* — verification command diffed the full spec against the §11-only snapshot. Rewritten to extract §11 via awk before diffing; snapshot file gained a trailing newline. Verified passing.
+
+**Reason:** Pre-Phase-3 problems; Phase 3 added enough new invariants that the broken ones now stand out. Phase 7 reconcile re-audited and found additional cases. Fixing requires per-invariant judgment (delete vs reword vs generalize vs make-the-command-actually-work). Two of the new findings (INV-006, INV-013) were fixed in Phase 7 commit; the four remaining (INV-009, INV-010, INV-011, INV-020) are Phase 8 cleanup candidates.
+**Will bite when:** `compass:invariant-scan` runs against this project; the listed invariants silently skip or return BROKEN_VERIFICATION; downstream projects inherit these as templates and propagate the same pattern.
+**Cost to fix:** S (15-30 minutes per invariant; mostly mechanical).
+**Logged:** 2026-06-24 (extended 2026-06-25 by Phase 7 reconcile)
 
 ## DEBT-008: Stale `.bak` files in the working tree
 **Files:** `.architecture/manifest.md.bak`, `scripts/bootstrap-architecture.sh.bak`, `templates/architecture/manifest.md.bak`

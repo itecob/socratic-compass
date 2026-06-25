@@ -2,6 +2,8 @@
 
 **Status:** accepted
 **Date:** 2026-06-24
+**Decided by:** A
+**Provenance note:** Pre-interview-system decision (back-filled per C-006 audit on 2026-06-25). Author-drafted during initial spec/plan creation; human ratified at spec submission.
 **Context:** Skills cross-reference each other via prefix; collisions are possible with other plugins (notably Superpowers). The prefix must be both unique and readable.
 **Decision:** Use `compass:` (long form) rather than `se:` (short form).
 **Consequences:** Easier — references are self-documenting and unlikely to collide. Harder — every absorbed skill needs sed rewriting and the prefix is verbose in cross-references.

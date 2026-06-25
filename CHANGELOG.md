@@ -106,6 +106,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phase 6 validation file at `.architecture/validation/phase-06-2026-06-25-1156.md`.
 - Concerns 8, 10, 13, 14 (cosmetic) acknowledged in the validation file and either fixed or recorded as deferred. The orphaned `dist/ziitB0W1` from the original script's UWP rename-failure persists in the user's `dist/` directory and requires PowerShell `Remove-Item dist/*` to clean (gitignored, will not be committed).
 
+### Added (Phase 7 — Dogfood reconcile, 2026-06-25)
+- `.architecture/manifest.md`: ADR 0019 indexed (the Phase 6 commit had omitted it).
+- `.architecture/session-handoffs/2026-06-25-consolidated-build-handoff.md`: consolidated multi-phase back-fill documenting H/A/D ratio per phase (10:34:12 totals, ratio 18:59:21 matching the declared Hybrid involvement setting per ADR 0008), Skill Build Checklist application per the 9 new skills (per ADR 0010), per-phase artifact inventory, and the premise-check ↔ session inventory link. INV-011 and INV-019 now have a target file to verify against.
+- ADRs 0001–0005: `**Decided by:**` field back-filled with provenance notes (0001/0002/0003/0004 → A; 0005 → H). Closes the C-006 violation surfaced by Phase 7 reconcile.
+- ADR 0019: rewritten to match the canonical bold-inline-label ADR template (lowercase "accepted", `**Context:**`/`**Decision:**`/`**Consequences:**` inline labels, explicit `**Invariants this creates:**` field). No content change.
+- `.architecture/invariants.md`: INV-006 verification command rewritten from broken bash to a working shell loop matching `plans/*.md` dates against `.architecture/interviews/`. Empirically verified PASS.
+- `.architecture/invariants.md`: INV-013 verification command rewritten to scope the diff to spec §11 via `awk` before comparing to the snapshot. Empirically verified PASS.
+- `specs/2026-06-24-compass-design.md.criteria-snapshot`: trailing newline added (one-byte file-format normalization, not a §11 content change).
+- `.architecture/debt-log.md`: DEBT-007 extended with Phase 7 reconcile findings (INV-006 and INV-013 marked resolved; INV-009/010/011/020 added as remaining "Manual"-without-token candidates for Phase 8 cleanup).
+
+### Meta-validation
+- Phase 7 adversarial subagent returned PASS WITH CONCERNS (9 concerns total: 6 load-bearing, 3 cosmetic).
+- 6 load-bearing concerns addressed in this commit cycle: R1 (INV-006 broken bash fixed), R2 (Decided-by back-filled), R3 (ADR 0019 template normalized), R4 (INV-013 scoped to §11), R5 (session-handoffs gap closed via consolidated handoff — human chose option B), R7 (DEBT-007 extended). R6 (Phase 8 INV-002 verification slot) recorded in the consolidated handoff's open-questions section for Phase 8 execution.
+- Phase 7 validation file at `.architecture/validation/phase-07-2026-06-25-1340.md`.
+- Six verifiable invariants now PASS empirically: INV-001, INV-003, INV-004, INV-005, INV-006 (newly working), INV-013 (newly working). All 19 ADRs indexed in manifest with consistent template format and `Decided by:` fields populated.
+
 ### Still to come
-- Phase 7: Dogfood `.architecture/` for the plugin's own design decisions (mostly done in advance during the architecture bootstrap; remaining items to be reconciled at phase boundary).
-- Phase 8: Final verification, including INV-014 transferability test per ADR 0011.
+- Phase 8: Final verification. Includes (a) invariant scan across all 24 invariants; (b) INV-014 transferability test per ADR 0011; (c) INV-002 standalone-install verification per Phase 7 R6; (d) DEBT-007 final cleanup for INV-009/010/011/020; (e) DEBT-012 citation rewrite per INV-021 spec rewrite; (f) final adversarial review.

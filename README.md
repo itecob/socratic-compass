@@ -4,7 +4,7 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 
 ## Status
 
-**Phase 6 of 8 complete — Packaging shipped.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–6 are complete: the architecture journal, scaffolding, template + bootstrap, all nine new strategic skills, all fourteen absorbed Superpowers workflow skills, four advisory Claude Code hooks (per ADR 0017), and two packaging scripts that produce the Cowork `.plugin` archive and the Claude Code plugin directory (per ADR 0019). Phases 7–8 add dogfood reconcile and final verification.
+**Phase 7 of 8 complete — Dogfood reconciled.** The plugin is being built incrementally against the implementation plan, using the plugin's own discipline (socratic-interview, scope-bounded mini-interviews, adversarial subagent at phase boundaries). Phases 0–7 are complete. Phase 7 closed by fixing broken invariant verifications (INV-006, INV-013), back-filling the `Decided by:` field on early ADRs, normalizing ADR 0019 to the canonical template, and writing a consolidated session-handoff that captures the H/A/D ratio across the build (per ADR 0008). Phase 8 is the final verification.
 
 | Phase | Status | Contents |
 |---|---|---|
@@ -15,8 +15,8 @@ Repository for the **Compass** plugin — strategic-programming skills with pers
 | 4 (14 absorbed Superpowers skills) | Complete | Imported verbatim with namespace rewrite + attribution footer. |
 | 5 (Hooks) | Complete | Claude Code `SessionStart`, `PreToolUse`, `SessionEnd` reminders. |
 | 6 (Packaging) | Complete | `package-cowork.sh` (zip), `package-claude-code.sh` (rsync). LICENSE + NOTICE added. Runtime excludes `.architecture/`, `specs/`, `plans/` per ADR 0019. |
-| 7 (Dogfood reconcile) | Pending | Reconcile plugin's own `.architecture/` with what was bootstrapped early. |
-| 8 (Final verification) | Pending | Invariant scan + INV-014 transferability test. |
+| 7 (Dogfood reconcile) | Complete | INV-006 and INV-013 verifications fixed; ADR 0019 template normalized; Decided-by back-filled on ADRs 0001–0005; consolidated session-handoff written; DEBT-007 extended. |
+| 8 (Final verification) | Pending | Invariant scan + INV-014 transferability test + INV-002 standalone-install verification. |
 
 ## What's in here right now
 
