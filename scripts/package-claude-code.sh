@@ -40,8 +40,8 @@ if ! command -v rsync >/dev/null 2>&1; then
   echo "[compass]   with the optional Unix tools, or use WSL." >&2
   exit 1
 fi
-if [ ! -r "$ROOT/plugin.json" ]; then
-  echo "[compass] ERROR: $ROOT/plugin.json not found." >&2
+if [ ! -r "$ROOT/.claude-plugin/plugin.json" ]; then
+  echo "[compass] ERROR: $ROOT/.claude-plugin/plugin.json not found." >&2
   exit 2
 fi
 

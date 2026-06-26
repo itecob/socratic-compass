@@ -15,7 +15,7 @@
 #   - .DS_Store         — macOS Finder metadata
 #
 # Includes:
-#   - plugin.json
+#   - .claude-plugin/plugin.json
 #   - README.md, CHANGELOG.md, LICENSE, NOTICE
 #   - skills/ (all 23 SKILL.md + companion files)
 #   - hooks/ (4 hook scripts)
@@ -52,8 +52,8 @@ if ! command -v tar >/dev/null 2>&1; then
   echo "[compass] ERROR: tar not found." >&2
   exit 1
 fi
-if [ ! -r "$ROOT/plugin.json" ]; then
-  echo "[compass] ERROR: $ROOT/plugin.json not found." >&2
+if [ ! -r "$ROOT/.claude-plugin/plugin.json" ]; then
+  echo "[compass] ERROR: $ROOT/.claude-plugin/plugin.json not found." >&2
   exit 2
 fi
 
