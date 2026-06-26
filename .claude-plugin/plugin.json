@@ -1,8 +1,10 @@
 {
   "name": "compass",
   "version": "0.1.0",
-  "description": "Strategic-programming skills with persistent architectural memory for Claude Code and Cowork. Closes gaps the existing Superpowers plugin leaves open: socratic-interview drives planning, premise-check validates and categorizes, design-archeology reads existing code, tradeoff-matrix forces named-axis comparison, adversarial-review attacks the plan, architecture-journal manages cross-session memory, session-handoff captures structural changes, invariant-scan verifies documented invariants, complexity-budget tracks shortcuts.",
-  "author": { "name": "itecob" },
+  "description": "Strategic-programming skills with persistent architectural memory. Adds socratic-interview, premise-check, design-archeology, tradeoff-matrix, adversarial-review, architecture-journal, session-handoff, invariant-scan, and complexity-budget \u2014 plus an .architecture/ journal that survives across sessions. Closes during-task gaps the Superpowers plugin leaves open.",
+  "author": {
+    "name": "itecob"
+  },
   "license": "MIT",
   "homepage": "https://github.com/itecob/socratic-compass"
 }
