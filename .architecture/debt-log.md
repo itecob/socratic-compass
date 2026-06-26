@@ -118,3 +118,11 @@ Surfaced by Phase 7 reconcile audit (2026-06-25):
 **Will bite when:** Outside reader reviews the transferability test result, notices the synthetic limitation, and questions whether the plugin actually works for real users. Or: a real-user re-run surfaces a discipline gap the synthetic run masked.
 **Cost to fix:** M (30-45 minutes of a real user's time stepping through socratic-interview questions on a new non-Compass problem, plus 15 minutes of subsequent skills, plus documenting the result).
 **Logged:** 2026-06-25
+
+## DEBT-014: (Resolved 2026-06-25) Shell scripts shipped with platform-dependent line endings
+**Files:** `scripts/*.sh`, `hooks/*.sh`, `.gitattributes`
+**Deferred:** *(Was: not enforcing LF line endings on `.sh` files via `.gitattributes`.)*
+**Reason:** Windows clones with default `core.autocrlf=true` convert LF→CRLF on checkout. Bash then chokes on the `\r` characters with `$'\r': command not found` and `invalid option name 'pipefall'` (mis-tokenized `pipefail`). Discovered when the user attempted INV-002 verification on a different Windows machine — `bash scripts/package-cowork.sh` failed immediately. Build was non-reproducible across Windows clones.
+**Will bite when:** *(Was a blocker for cross-machine INV-002; now resolved.)*
+**Cost to fix:** *(Was S; now zero.)*
+**Resolved:** 2026-06-25 — `.gitattributes` added with `*.sh text eol=lf` rule. All future clones get LF-ended shell scripts regardless of `core.autocrlf` setting. Existing clones (including the user's INV-002 verification machine) need a one-time `git rm --cached -r . && git reset --hard` or `git checkout-index -af` to normalize their working tree. Workaround for the immediate INV-002 test: `wsl sed -i 's/\r$//' scripts/*.sh hooks/*.sh`.

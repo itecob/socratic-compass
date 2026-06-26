@@ -1,0 +1,24 @@
+# Force LF line endings for files that must be LF to work (shell scripts).
+# Windows users with autocrlf=true would otherwise get CRLF, and bash chokes
+# on \r characters as "$'\r': command not found" / "invalid option name".
+#
+# Per DEBT-014.
+
+# Shell scripts must be LF regardless of OS.
+*.sh           text eol=lf
+*.bash         text eol=lf
+
+# Python scripts also LF (some tools refuse CRLF shebangs).
+*.py           text eol=lf
+
+# Markdown, JSON, and other text — let git auto-detect.
+# (Default for unspecified text files.)
+*              text=auto
+
+# Binary files — never touch.
+*.png          binary
+*.jpg          binary
+*.gif          binary
+*.pdf          binary
+*.zip          binary
+*.plugin       binary
