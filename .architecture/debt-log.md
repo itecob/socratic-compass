@@ -126,3 +126,18 @@ Surfaced by Phase 7 reconcile audit (2026-06-25):
 **Will bite when:** *(Was a blocker for cross-machine INV-002; now resolved.)*
 **Cost to fix:** *(Was S; now zero.)*
 **Resolved:** 2026-06-25 — `.gitattributes` added with `*.sh text eol=lf` rule. All future clones get LF-ended shell scripts regardless of `core.autocrlf` setting. Existing clones (including the user's INV-002 verification machine) need a one-time `git rm --cached -r . && git reset --hard` or `git checkout-index -af` to normalize their working tree. Workaround for the immediate INV-002 test: `wsl sed -i 's/\r$//' scripts/*.sh hooks/*.sh`.
+
+## DEBT-015: `architecture-journal`'s prior passive-recommendation behavior superseded by ADR 0020
+**Files:** `skills/architecture-journal/SKILL.md`
+**Deferred:** *(Was: passive printing of bootstrap recommendation without offering to execute.)*
+**Reason:** Phase 8 INV-002 standalone-install verification surfaced that the passive recommendation was being ignored by users in real-world testing. Kevin's directive: assertive over advisory.
+**Resolved:** 2026-06-26 — ADR 0020 moves the actionable wizard to `compass:using-compass`. architecture-journal's Bootstrap section is rewritten to defer to using-compass.
+**Logged:** 2026-06-26 (logged at resolution)
+
+## DEBT-016: First-load wizard's "last 10 turns" intent-recovery heuristic is empirically unverified
+**Files:** `skills/using-compass/SKILL.md` (the "Post-wizard resume" subsection)
+**Deferred:** Tuning the active-context-review heuristic against real-user data. The "last 10 turns" framing is a guess that survives the obvious edge cases (the agent can ask for clarification if ambiguous, can ask "what were you trying to do?" if no pre-context exists).
+**Reason:** Edge cases (fresh conversation with no pre-context, long unrelated context, multi-skill ambiguous intent) are correctable in practice via clarification questions. The heuristic itself is not empirically tuned.
+**Will bite when:** Real-user transferability testing surfaces a case where the wizard pivots to the wrong intent without asking. The recoverable path is "user corrects, agent updates," but it's a UX papercut on the central first-impression of the plugin.
+**Cost to fix:** M (collect data from real users, tune the heuristic, may require a new ADR if the conclusion is "ask every time" or "never pivot, always ask").
+**Logged:** 2026-06-26

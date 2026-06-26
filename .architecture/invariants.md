@@ -145,3 +145,15 @@ What must remain true across changes. Each invariant has an ID, the ADR that est
 **Verification:** `for s in brainstorming writing-plans executing-plans subagent-driven-development finishing-a-development-branch using-compass; do grep -qE "(mandatory|must check|document.*decision)" "skills/$s/SKILL.md" || { echo "MISSING discipline-keyword in $s"; exit 1; }; done; echo OK`
 **Expected:** Output is `OK`.
 **On failure:** Strengthen the coupling section's language to make the check mandatory and the decision documented (per ADR 0018).
+
+## INV-025: `compass:using-compass` SKILL.md hosts the first-load wizard
+**Established by:** ADR 0020
+**Verification:** `grep -q "First-load wizard" skills/using-compass/SKILL.md && echo OK`
+**Expected:** Output is `OK`.
+**On failure:** Re-insert the wizard section per ADR 0020.
+
+## INV-026: Every Compass skill that consumes `.architecture/` artifacts contains an error-and-redirect block
+**Established by:** ADR 0020
+**Verification:** `for s in premise-check design-archeology architecture-journal invariant-scan complexity-budget session-handoff brainstorming writing-plans executing-plans subagent-driven-development finishing-a-development-branch using-compass; do grep -q "compass:using-compass" "skills/$s/SKILL.md" || { echo "MISSING: $s"; exit 1; }; done; echo OK`
+**Expected:** Output is `OK`.
+**On failure:** Re-insert the redirect block per ADR 0020.

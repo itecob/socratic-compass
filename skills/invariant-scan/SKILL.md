@@ -3,6 +3,22 @@ name: invariant-scan
 description: Use on demand before a release, after a significant refactor, or when debugging a regression - sweeps the codebase to verify documented invariants in .architecture/invariants.md still hold by running each invariant's verification command; can also be scheduled via mcp__scheduled-tasks
 ---
 
+
+## Requires `.architecture/` (per ADR 0020)
+
+This skill consumes artifacts from `.architecture/`. If the project hasn't been set up with Compass yet, stop and redirect:
+
+**Check:** `[ -d ".architecture" ]` returns true.
+
+**If `.architecture/` is missing**, output verbatim and stop:
+
+> This project doesn't have `.architecture/` set up yet — Compass needs it for this skill to do its job. Run `compass:using-compass` first to authorize setup. After that completes, your original request will resume automatically.
+
+Then invoke `compass:using-compass` and let its first-load wizard handle the onboarding. Do not proceed with this skill until `.architecture/` exists.
+
+If `.architecture/` exists, proceed with the rest of this skill normally.
+
+
 # Invariant Scan
 
 ## Overview

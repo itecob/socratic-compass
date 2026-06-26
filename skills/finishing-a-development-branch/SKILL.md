@@ -3,6 +3,22 @@ name: finishing-a-development-branch
 description: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup
 ---
 
+
+## Requires `.architecture/` (per ADR 0020)
+
+This skill consumes artifacts from `.architecture/`. If the project hasn't been set up with Compass yet, stop and redirect:
+
+**Check:** `[ -d ".architecture" ]` returns true.
+
+**If `.architecture/` is missing**, output verbatim and stop:
+
+> This project doesn't have `.architecture/` set up yet — Compass needs it for this skill to do its job. Run `compass:using-compass` first to authorize setup. After that completes, your original request will resume automatically.
+
+Then invoke `compass:using-compass` and let its first-load wizard handle the onboarding. Do not proceed with this skill until `.architecture/` exists.
+
+If `.architecture/` exists, proceed with the rest of this skill normally.
+
+
 # Finishing a Development Branch
 
 ## Overview

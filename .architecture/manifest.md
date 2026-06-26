@@ -54,3 +54,4 @@ The implementation plan lives at `plans/2026-06-24-compass-plan.md`. The design 
 - 0017 — Prerequisite enforcement lives in SKILL.md bodies (cross-platform); hooks are Claude Code-only reinforcement.
 - 0018 — Coupled absorbed skills use the mandatory-check / conditional-action / documented-decision pattern.
 - 0019 — Runtime packages exclude `.architecture/`, `specs/`, `plans/` (option B); LICENSE pure MIT, attribution moved to NOTICE.
+- 0020 — First-load onboarding wizard hosted by `using-compass`; other dependent skills error-and-redirect.

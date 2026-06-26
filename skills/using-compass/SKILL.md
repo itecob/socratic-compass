@@ -15,6 +15,102 @@ IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
 This is not negotiable. This is not optional. You cannot rationalize your way out of this.
 </EXTREMELY-IMPORTANT>
 
+## First-load wizard (per ADR 0020)
+
+**This section runs BEFORE any other content in this skill.**
+
+### Detection
+
+Check whether the project has been set up with Compass:
+
+```
+[ -d ".architecture" ] && echo "set-up" || echo "not-set-up"
+```
+
+If `.architecture/` exists, skip the wizard entirely and proceed to the "## Instruction Priority" section below.
+
+If `.architecture/` does NOT exist, run the wizard.
+
+### The wizard
+
+Output this verbatim to the user, then wait for their response:
+
+> Compass is loaded but this project hasn't been set up with Compass's memory mechanism yet. Compass's journal-grounded skills (premise-check, design-archeology, invariant-scan, complexity-budget, session-handoff, and the planning/execution skills) need an `.architecture/` directory to do their job. Skills that don't need the journal (test-driven-development, systematic-debugging, verification-before-completion, requesting-code-review, etc.) will work either way.
+>
+> Setting up Compass means creating an `.architecture/` directory with eleven files: a manifest, an invariants log, a conventions file, a debt log, a scope-deferred file, one example ADR (decisions/0001-example.md), and five placeholder READMEs for subdirectories that get populated over time. The bootstrap script (`scripts/bootstrap-architecture.sh`) does this in one pass. Your platform may ask you to confirm each file write — that's normal.
+>
+> **You have four options. Pick one:**
+>
+> 1. **Walk through it** — I run the bootstrap script. Your platform will prompt you for each file write. You see and authorize each one. (~12 prompts.)
+> 2. **Just build it** — I run the bootstrap script and immediately write an involvement-setting ADR with "hands-off-with-receipts" so I keep proceeding without per-decision check-ins. You release control deliberately; the journal records the release.
+> 3. **Skip setup for this project** — I won't bootstrap. Compass will run in degraded mode: the journal-needing skills will redirect you to invoke `compass:using-compass` again (this skill, this prompt) when they're needed. The discipline isn't gone; it's just deferred until you set it up.
+> 4. **Tell me more before I decide** — I explain what `.architecture/` contains, what each file does, and why the skills need it. You can then come back to options 1-3.
+>
+> Which?
+
+### Execute on user response
+
+**On (1) — Walk through it:**
+Run `bash scripts/bootstrap-architecture.sh .` (or the platform's equivalent). After it completes, say:
+> Setup complete. Reading your recent messages to resume what you were trying to do.
+
+Then proceed to the **Post-wizard resume** step below.
+
+**On (2) — Just build it:**
+Run `bash scripts/bootstrap-architecture.sh .` (or the platform's equivalent). After it completes, write `.architecture/decisions/0001-involvement-just-build-it.md` with:
+
+```markdown
+# ADR 0001: Involvement setting — hands-off-with-receipts
+
+**Status:** accepted
+**Date:** <today>
+**Decided by:** H
+**Context:** User selected option 2 ("just build it") in compass:using-compass's first-load wizard. They deliberately released per-decision control to the agent.
+**Decision:** Involvement = hands-off-with-receipts per ADR 0008's involvement settings.
+**Consequences:** Agent proceeds without per-decision check-ins. Decisions get recorded in session-handoffs/ at session end. User can change this at any time by writing a superseding ADR.
+**Decided by:** H
+```
+
+Then say:
+> Setup complete. Involvement: hands-off-with-receipts (you can change this at any time by writing a superseding ADR). Reading your recent messages to resume what you were trying to do.
+
+Then proceed to **Post-wizard resume**.
+
+**On (3) — Skip setup for this project:**
+Do NOT bootstrap. Print:
+> Compass running in degraded mode for this project. Skills that need `.architecture/` will redirect you here. Skills that don't need it (test-driven-development, systematic-debugging, verification-before-completion, requesting-code-review, etc.) will work normally. To set up later: invoke this skill again.
+
+Continue with the user's original intent per **Post-wizard resume**, but DO NOT block on missing `.architecture/` — invoke whatever skill they wanted and let the per-skill error-and-redirect (per INV-026) handle the journal-needing case if it comes up.
+
+**On (4) — Tell me more:**
+Explain:
+- `.architecture/manifest.md` — index of what lives in `.architecture/`. Edited as the journal grows.
+- `.architecture/invariants.md` — things that must remain true; each has a verification command. Skills like `compass:invariant-scan` run these.
+- `.architecture/conventions.md` — non-obvious idioms specific to this project.
+- `.architecture/debt-log.md` — shortcuts you've taken and when they'll bite.
+- `.architecture/scope-deferred.md` — mid-build insights that are out of scope right now.
+- `.architecture/decisions/` — Architecture Decision Records, one per file. The first real ADR you'd write supersedes the example.
+- `.architecture/interviews/` — socratic-interview transcripts when planning gets nontrivial.
+- `.architecture/premise-checks/` — reports from `compass:premise-check` runs.
+- `.architecture/design-notes/` — outputs from `compass:design-archeology` runs on existing files.
+- `.architecture/session-handoffs/` — structured notes at session end. Cross-session memory.
+- `.architecture/validation/` — adversarial-review outputs at phase boundaries.
+
+Then re-display the four options and wait for their response.
+
+### Post-wizard resume
+
+After the wizard completes (any path), the agent reviews the last ~10 turns of the current conversation and resumes the user's original intent. Specifically:
+
+1. Look at the user's messages in the conversation BEFORE this wizard ran.
+2. If those messages contain a request that would invoke a Compass skill (e.g., "write me a plan for X" → `compass:writing-plans`, "brainstorm Y" → `compass:brainstorming`), proceed with that skill now.
+3. If the recent context is ambiguous, ask: "Now that Compass is set up — was there something specific you wanted to start with?"
+4. If the conversation has no pre-wizard context (the wizard ran on the user's first message), ask: "Compass is ready. What were you trying to do?"
+
+The wizard does NOT need to remember pre-wizard state — the agent has the conversation in its working memory. The wizard is a checkpoint, not a coordinator.
+
+
+
 ## Instruction Priority
 
 Compass skills override default system prompt behavior, but **user instructions always take precedence**:

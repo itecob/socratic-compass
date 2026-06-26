@@ -3,6 +3,22 @@ name: architecture-journal
 description: Use at session start in a project with a .architecture/ directory, and when a structural decision is being made or an invariant is established
 ---
 
+
+## Requires `.architecture/` (per ADR 0020)
+
+This skill consumes artifacts from `.architecture/`. If the project hasn't been set up with Compass yet, stop and redirect:
+
+**Check:** `[ -d ".architecture" ]` returns true.
+
+**If `.architecture/` is missing**, output verbatim and stop:
+
+> This project doesn't have `.architecture/` set up yet — Compass needs it for this skill to do its job. Run `compass:using-compass` first to authorize setup. After that completes, your original request will resume automatically.
+
+Then invoke `compass:using-compass` and let its first-load wizard handle the onboarding. Do not proceed with this skill until `.architecture/` exists.
+
+If `.architecture/` exists, proceed with the rest of this skill normally.
+
+
 # Architecture Journal
 
 ## Overview
@@ -91,12 +107,12 @@ This is the auditable backseating-detection mechanism.
 
 ## Bootstrap (no `.architecture/` yet)
 
-If session start detects no `.architecture/`:
+**Superseded by ADR 0020.** The passive recommendation behavior is replaced by `compass:using-compass`'s first-load wizard. If session start detects no `.architecture/`, defer to using-compass:
 
-1. Print:
-   > "This project has no `.architecture/` directory. Compass's memory mechanism is unavailable. To enable it: run `<plugin>/scripts/bootstrap-architecture.sh .` and commit the result. Then re-invoke this skill at next session start."
+1. Output:
+   > "This project doesn't have `.architecture/` set up. Compass's onboarding wizard is in `compass:using-compass`. Invoke it now to set up authorization for the journal mechanism."
 
-2. Continue the session without the journal. Do not silently create `.architecture/` — that's a structural decision the human should make deliberately.
+2. Invoke `compass:using-compass`. Do not silently create `.architecture/` — that's still a structural decision the human must authorize, but the wizard makes the authorization actionable rather than passive.
 
 ## Red Flags — STOP
 
