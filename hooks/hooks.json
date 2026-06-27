@@ -1,0 +1,49 @@
+{
+    "description": "Compass plugin — advisory reinforcement hooks (exit 0 always, per ADR 0003/0017)",
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh\"",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-end.sh\"",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool-use-edit.sh\"",
+                        "timeout": 10
+                    }
+                ]
+            },
+            {
+                "matcher": "Write",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool-use-write.sh\"",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ]
+    }
+}

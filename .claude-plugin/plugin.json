@@ -1,9 +1,10 @@
 {
   "name": "compass",
   "version": "0.1.0",
-  "description": "Strategic-programming skills with persistent architectural memory. Adds socratic-interview, premise-check, design-archeology, tradeoff-matrix, adversarial-review, architecture-journal, session-handoff, invariant-scan, and complexity-budget \u2014 plus an .architecture/ journal that survives across sessions. Closes during-task gaps the Superpowers plugin leaves open.",
+  "description": "Strategic-programming skills with persistent architectural memory. Adds socratic-interview, premise-check, design-archeology, tradeoff-matrix, adversarial-review, architecture-journal, session-handoff, invariant-scan, and complexity-budget — plus an .architecture/ journal that survives across sessions. Closes during-task gaps the Superpowers plugin leaves open.",
   "author": {
-    "name": "itecob"
+    "name": "itecob",
+    "email": "kevin@itecob.com"
   },
   "license": "MIT",
   "homepage": "https://github.com/itecob/socratic-compass"
