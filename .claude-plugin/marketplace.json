@@ -1,0 +1,31 @@
+{
+  "name": "socratic-compass",
+  "owner": {
+    "name": "itecob",
+    "email": "kevin@itecob.com"
+  },
+  "metadata": {
+    "description": "Compass: strategic-programming skills with persistent architectural memory for Claude Code.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "compass",
+      "source": "./",
+      "description": "Strategic-programming skills with persistent architectural memory. Adds socratic-interview, premise-check, design-archeology, tradeoff-matrix, adversarial-review, architecture-journal, session-handoff, invariant-scan, and complexity-budget — plus an .architecture/ journal that survives across sessions. Closes during-task gaps the Superpowers plugin leaves open.",
+      "version": "0.1.0",
+      "author": {
+        "name": "itecob"
+      },
+      "category": "development",
+      "keywords": [
+        "architecture",
+        "planning",
+        "skills",
+        "memory",
+        "socratic",
+        "adr"
+      ]
+    }
+  ]
+}
