@@ -43,6 +43,15 @@ When implementation requires a function not in the plan:
 
 Implementing a function before writing its FIAO is a plan violation.
 
+## Speculative/TBD Action steps block promotion
+
+A `[speculative]` Action step (or bare `TBD` line, superseded syntax) blocks the
+function's task from being promoted — it must be resolved from prototype findings
+before the function is promoted. An outstanding `[speculative]`/TBD Action line means
+the task is not done, regardless of how much other code in the task is complete. Do not
+mark a task's Exit condition satisfied while any of its FIAO blocks still carry an
+unresolved `[speculative]` step.
+
 ## Soft language ban
 
 Never use these words in a FIAO Action line: `appropriately`, `as needed`, `handle`, `manage`, `process`, `validate`, `etc.`, `standard approach`, `reasonable`, `similar`, `relevant`, `necessary`, `latest`, `active`, `current`, `default`, `and so on`, `typical`, `normal`, `usually`, `generally`. Extend with domain-specific ambiguous terms as needed.
