@@ -553,9 +553,4 @@ Most Plan work is transcription of an already-brainstormed design into the Devel
 
 ## Next stage
 
-After Plan, before the Plan Review Gate: proceed to `compass:stage-rt-spec` (RT(spec) →
-Harden loop) to apply the tier × lens matrix to the specification. Continues until exit
-condition holds — all findings Resolved at all severity levels.
-
-Only after RT(spec) exits clean does the Plan Review Gate run (all 8 steps find no
-defects). Code does not start until the Gate passes.
+After the Plan Review Gate passes (all 8 steps find no defects) and before Code: proceed to `compass:adversarial-review` (RT(spec) → Harden loop) to apply the tier × lens matrix to the specification. Continues until exit condition holds.

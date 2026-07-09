@@ -84,22 +84,10 @@ applies to every Action step during RT(spec) regardless of epistemic label.
 
 **Superseded syntax — do not use:** bare `TBD — prototype required: <what is unknown>`
 without the `[speculative]` label; `// Soundness basis: <reasoning chain>` instead of
-the `[inferred]` basis-comment format. (The Plan State Header `soundness_basis` field is
-a separate, plan-level field and is unchanged by this — it documents the overall
-soundness basis, not individual steps.)
+the `[inferred]` basis-comment format.
 
 `TBD` Action lines block task promotion — must be resolved from prototype findings
 before the function is promoted. Outstanding TBD lines = incomplete plan.
-
-### Soft language — NEVER allowed in any FIAO line
-
-`appropriately`, `as needed`, `handle`, `manage`, `process`, `validate`, `etc.`,
-`standard approach`, `reasonable`, `similar`, `relevant`, `necessary`, `latest`,
-`active`, `current`, `default`, `and so on`, `typical`, `normal`, `usually`, `generally`
-
-Extend this list with domain-specific ambiguous terms before the soft language audit.
-This applies to every FIAO line — Action, Output, Does NOT, Caller must NOT assume,
-Side effects.
 
 ## Model routing for this stage
 
