@@ -19,11 +19,6 @@ pre-staging suite only — any exception to running all three types must be docu
 **Applied at:** after `RT(impl) → Harden` loop reaches its exit condition, before
 Verify.
 
-**Phase name note:** there is a second, later "Test" stage in the build process (the
-staging suite: load, chaos/fault injection, DAST, scenario/journey). To avoid
-collision, `PLAN_STATE.md`'s `Phase:` value for THIS stage is `Test(pre-staging)`, not
-a bare "Test" — the future staging-test stage will use `Test(staging)`.
-
 **Done when:** all three suite types have run and pass, per the Test Contract defined
 in `PLAN.md` Section 8 (see `compass:stage-plan` for that contract's format and
 requirements — this stage does not redefine it, only executes against it).
