@@ -9,9 +9,7 @@ Pilot skill — ported from the 18-stage Build Process's "Code" stage (`CLAUDE-D
 
 ## Scope
 
-Implement the current task's FIAO block(s) exactly as specified in `PLAN.md` / `PLAN_STATE.md`. This stage does **not** include: writing the plan (`compass:stage-plan`), red-teaming the implementation (`compass:stage-rt-impl`), or running the test suites (`compass:stage-test`) — those are separate stages/skills.
-
-**Only for FIAO-format plans.** This skill implements FIAO blocks from a `PLAN.md`/`PLAN_STATE.md` pair written by `compass:stage-plan`. If the plan was written by `compass:writing-plans` instead (checkbox-task format, no FIAO blocks), use `compass:executing-plans` or `compass:subagent-driven-development` — there is nothing for this skill's Plan Sync / Discovered Function Protocol to compare against otherwise.
+Implement the current task's FIAO block(s) exactly as specified in `PLAN.md` / `PLAN_STATE.md`. This stage does **not** include: writing the plan (`compass:writing-plans`), red-teaming the implementation (`compass:adversarial-review`), or running the test suites (`compass:test-driven-development`) — those are separate stages/skills.
 
 **Done when:** all tasks in scope are complete AND Plan Sync has been run after every completed task.
 
@@ -87,4 +85,4 @@ Per `CLAUDE.md` → Model Default: this stage runs on **Sonnet 5** by default. I
 
 ## Next stage
 
-After all tasks in scope are complete and Plan Sync has been run for each: proceed to `compass:stage-rt-impl` (RT(impl) → Harden loop) before `compass:stage-verify`.
+After all tasks in scope are complete and Plan Sync has been run for each: proceed to `compass:adversarial-review` (RT(impl) → Harden loop) before Verify.

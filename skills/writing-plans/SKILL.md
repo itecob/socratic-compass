@@ -29,14 +29,6 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
-**Before starting, check weight class:** if the work has a T1/T2 component (auth,
-trust boundaries, side-effecting orchestration, retry/queue logic) or otherwise needs
-formal red-teaming and a staging test suite, use `compass:stage-plan` (Development Plan
-Standard) instead — it produces `PLAN.md`/`PLAN_STATE.md` with FIAO blocks that
-`compass:stage-code` and `compass:stage-rt-spec` require. This skill's checkbox-task
-format is for `compass:executing-plans` / `compass:subagent-driven-development`, not
-`compass:stage-code`.
-
 **Context:** If working in an isolated worktree, it should have been created via the `compass:using-git-worktrees` skill at execution time.
 
 **Save plans to:** `docs/compass/plans/YYYY-MM-DD-<feature-name>.md`

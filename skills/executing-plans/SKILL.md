@@ -85,12 +85,6 @@ After all tasks complete and verified:
 - **compass:writing-plans** - Creates the plan this skill executes
 - **compass:finishing-a-development-branch** - Complete development after all tasks
 
-**Only for writing-plans-format plans.** This skill executes checkbox-task plans from
-`compass:writing-plans`. If the plan is a `PLAN.md`/`PLAN_STATE.md` pair from
-`compass:stage-plan` (Development Plan Standard, FIAO blocks with epistemic labels),
-use `compass:stage-code` instead — this skill has no Discovered Function Protocol or
-Plan Sync to reconcile FIAO deviations against.
-
 ## Compass coupling (per ADR 0018)
 
 This skill executes a plan; before any execution begins, you must perform these checks:

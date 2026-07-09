@@ -18,11 +18,8 @@ label. Identify `[speculative]` steps requiring prototype work.
 **Output:** typed interfaces and data types.
 **Done when:** no T1/T2 interface has an unlabeled Action step and no `[speculative]`
 step lacks a prototype plan.
-**Does NOT produce:** a full plan document — that's `compass:stage-plan`, which embeds
-this stage's output in its own Section 3 and Section 6. (For work light enough that
-`compass:writing-plans`' checkbox format applies instead — see `compass:stage-plan`'s
-"Choosing stage-plan vs writing-plans" section — this stage's FIAO work is usually
-unnecessary too; a lighter Data Dictionary/interface sketch suffices.)
+**Does NOT produce:** a full plan document — that's `compass:writing-plans` /
+the Plan stage, which embeds this stage's output in its own Section 3 and Section 6.
 
 ## Data Dictionary (Section 3)
 
@@ -82,7 +79,7 @@ Side effects:           <DB tables written, events emitted, caches invalidated, 
 | `[speculative]` | Uncertain. Blocks task promotion. Must be resolved before the function is promoted. |
 
 Omitting a label is not permitted — an unlabeled Action step is treated as
-`[speculative]` and blocks promotion. Lens 13 (Ambiguity, see `compass:stage-rt-spec`)
+`[speculative]` and blocks promotion. Lens 13 (Ambiguity, see `compass:adversarial-review`)
 applies to every Action step during RT(spec) regardless of epistemic label.
 
 **Superseded syntax — do not use:** bare `TBD — prototype required: <what is unknown>`
