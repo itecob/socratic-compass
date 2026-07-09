@@ -26,7 +26,11 @@ APPLIES WHEN:             Building a new component or making a scoped modificati
                           defined acceptance criteria and at least one T1 or T2 component.
 DOES NOT APPLY TO:        Hotfixes (< 3 files), exploratory prototypes, infrastructure-only
                           changes, data migrations, post-deployment runbooks.
-                          For T3-only projects: use Reduced Plan (see below).
+                          For T3-only projects: use Reduced Plan (see below), or
+                          `compass:writing-plans` if the work doesn't need FIAO/PLAN_STATE.md
+                          machinery at all (see "Choosing stage-plan vs writing-plans" below).
+                          For anything in this DOES NOT APPLY TO list, `compass:writing-plans`
+                          is usually the better fit outright.
 PROPORTIONALITY:          The planning cost is proportionate to the cost of failure.
                           For T1/T2 work, the plan prevents rework that costs more than
                           the plan itself. The standard is not overhead — it is insurance.
@@ -43,6 +47,25 @@ KNOWN LIMITATION:         The standard enforces structure. The Plan Review Gate 
                           "Does this Action line specify enough to write the function
                           without inference?"
 ```
+
+## Choosing stage-plan vs writing-plans
+
+Compass ships two plan-writing skills at different weight classes. They are not
+duplicates — pick by the same criteria as Template Applicability above:
+
+- **`compass:stage-plan`** (this skill) — full Development Plan Standard: FIAO blocks
+  with epistemic labels, tier classification, `PLAN.md`/`PLAN_STATE.md` split, Plan
+  Review Gate, Test Contract, and (for T1/T2) mandatory red-teaming and a staging test
+  suite. Use when the work has at least one T1/T2 component, or when it must feed into
+  `compass:stage-code` / `compass:stage-rt-spec`'s FIAO-based pipeline.
+- **`compass:writing-plans`** — lighter checkbox-task plans (`docs/compass/plans/*.md`)
+  for `compass:executing-plans` / `compass:subagent-driven-development` to run. Use for
+  hotfixes, exploratory prototypes, infrastructure-only changes, or any T3-only work
+  where the FIAO/tier/red-team machinery isn't needed.
+
+Do not mix formats: a plan written by `writing-plans` has no FIAO blocks for
+`stage-code` to implement against, and a `PLAN.md`/`PLAN_STATE.md` pair from this skill
+is not what `executing-plans` expects.
 
 ## Correctness Definition
 
